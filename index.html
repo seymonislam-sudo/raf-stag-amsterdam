@@ -109,19 +109,19 @@
             </div>
 
             <div class="lineup-card">
-                <div class="lineup-placeholder">1️⃣</div>
+                <div class="lineup-placeholder">🇷🇺</div>
                 <div class="lineup-name">YEVGENY</div>
                 <div class="lineup-role">THE CREW</div>
             </div>
 
             <div class="lineup-card">
-                <div class="lineup-placeholder">2️⃣</div>
+                <div class="lineup-placeholder">1️⃣</div>
                 <div class="lineup-name">DAN</div>
                 <div class="lineup-role">THE CREW</div>
             </div>
 
             <div class="lineup-card">
-                <div class="lineup-placeholder">3️⃣</div>
+                <div class="lineup-placeholder">2️⃣</div>
                 <div class="lineup-name">Dave</div>
                 <div class="lineup-role">THE CREW</div>
             </div>
@@ -327,13 +327,12 @@
         
         <div class="upload-zone" id="uploadZone">
             <div class="upload-icon">📸</div>
-            <div class="upload-text">Click or Drag Photos Here</div>
+            <div class="upload-text">Click to Upload Photos</div>
             <div class="upload-subtext">Share the chaos with the crew</div>
-            <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
         </div>
 
         <div class="photo-grid" id="photoGrid">
-            <!-- Photos will be added here dynamically -->
+            <!-- Photos will be loaded here dynamically from Cloudinary -->
         </div>
     </section>
 
@@ -394,5 +393,116 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Cloudinary Configuration
+        const CLOUD_NAME = 'dqugijser';
+        const UPLOAD_PRESET = 'rafstag_photos';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadZone = document.getElementById('uploadZone');
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.multiple = true;
+            fileInput.style.display = 'none';
+            document.body.appendChild(fileInput);
+
+            // Upload zone click handler
+            uploadZone.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            // File selection handler
+            fileInput.addEventListener('change', async (e) => {
+                const files = Array.from(e.target.files);
+                
+                for (const file of files) {
+                    await uploadToCloudinary(file);
+                }
+                
+                fileInput.value = ''; // Reset input
+            });
+
+            // Load existing photos
+            loadPhotosFromCloudinary();
+        });
+
+        // Upload file directly to Cloudinary
+        async function uploadToCloudinary(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', UPLOAD_PRESET);
+
+            try {
+                const response = await fetch(
+                    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+                    {
+                        method: 'POST',
+                        body: formData
+                    }
+                );
+
+                const data = await response.json();
+                
+                if (data.secure_url) {
+                    addPhotoToGallery(data);
+                }
+            } catch (error) {
+                console.error('Upload failed:', error);
+                alert('Upload failed. Please try again.');
+            }
+        }
+
+        // Add photo to gallery immediately after upload
+        function addPhotoToGallery(info) {
+            const photoGrid = document.getElementById('photoGrid');
+            const photoItem = document.createElement('div');
+            photoItem.className = 'photo-item';
+            photoItem.innerHTML = `
+                <img src="${info.secure_url}" alt="Stag photo" loading="lazy">
+            `;
+            photoGrid.insertBefore(photoItem, photoGrid.firstChild);
+        }
+
+        // Load all photos from Cloudinary folder
+        async function loadPhotosFromCloudinary() {
+            const photoGrid = document.getElementById('photoGrid');
+            
+            try {
+                // Using Cloudinary's client-side search
+                const response = await fetch(
+                    `https://res.cloudinary.com/${CLOUD_NAME}/image/list/Rafstag.json`
+                );
+                
+                if (!response.ok) {
+                    throw new Error('Folder not found or empty');
+                }
+                
+                const data = await response.json();
+                photoGrid.innerHTML = ''; // Clear loading state
+                
+                if (data.resources && data.resources.length > 0) {
+                    data.resources.reverse().forEach(resource => {
+                        const photoItem = document.createElement('div');
+                        photoItem.className = 'photo-item';
+                        photoItem.innerHTML = `
+                            <img src="https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,h_400,w_400/${resource.public_id}.jpg" 
+                                 alt="Stag photo" 
+                                 loading="lazy">
+                        `;
+                        photoGrid.appendChild(photoItem);
+                    });
+                } else {
+                    photoGrid.innerHTML = '<p style="color: #888; text-align: center; width: 100%; padding: 40px 20px;">No photos yet. Be the first to upload!</p>';
+                }
+            } catch (error) {
+                // This is normal if no photos have been uploaded yet
+                photoGrid.innerHTML = '<p style="color: #888; text-align: center; width: 100%; padding: 40px 20px;">No photos yet. Click above to upload the first one!</p>';
+            }
+        }
+
+        // Refresh photos every 30 seconds to show new uploads from others
+        setInterval(loadPhotosFromCloudinary, 30000);
+    </script>
 </body>
 </html>
