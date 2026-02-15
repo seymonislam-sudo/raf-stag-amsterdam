@@ -330,9 +330,7 @@
             <div class="upload-subtext">Share the chaos with the crew</div>
         </div>
 
-        <div class="photo-grid" id="photoGrid">
-            <p id="galleryStatus" style="color: #888; text-align: center; width: 100%; padding: 40px 20px;">Loading photos...</p>
-        </div>
+        <div class="photo-grid" id="photoGrid"></div>
     </section>
 
     <!-- Tour Rules -->
@@ -391,216 +389,178 @@
         </div>
     </footer>
 
-    <!-- Core site functionality (countdown, smooth scroll, parallax, notifications) -->
+    <!-- Core site functionality -->
     <script src="script.js"></script>
 
-    <!-- Cloudinary Photo Upload & Shared Gallery -->
-    <script>
-        (function() {
-            // ==========================================================
-            //  CONFIG
-            // ==========================================================
-            const CLOUD_NAME  = 'dqugijser';
-            const UPLOAD_PRESET = 'rafstag_photos';
-            const TAG_NAME    = 'rafstag';
+    <!-- Firebase SDK (modular, from CDN) -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js';
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp }
+            from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js';
 
-            // ==========================================================
-            //  DOM
-            // ==========================================================
-            const uploadZone = document.getElementById('uploadZone');
-            const photoGrid  = document.getElementById('photoGrid');
-            const statusEl   = document.getElementById('galleryStatus');
+        // ── Firebase Config ──────────────────────────────────────
+        const app = initializeApp({
+            apiKey: "AIzaSyBLh95u3yOVEAAehXQhTh3d-O73RZ5m41w",
+            authDomain: "rafstag-33347.firebaseapp.com",
+            projectId: "rafstag-33347",
+            storageBucket: "rafstag-33347.firebasestorage.app",
+            messagingSenderId: "750551283012",
+            appId: "1:750551283012:web:d35c36693043ae4c92d311"
+        });
 
-            const fileInput  = document.createElement('input');
-            fileInput.type   = 'file';
-            fileInput.accept = 'image/*';
-            fileInput.multiple = true;
-            fileInput.style.display = 'none';
-            document.body.appendChild(fileInput);
+        const db = getFirestore(app);
+        const photosRef = collection(db, 'photos');
 
-            // De-duplication set (prevents same photo appearing twice)
-            const renderedIds = new Set();
+        // ── Cloudinary Config ────────────────────────────────────
+        const CLOUD_NAME    = 'dqugijser';
+        const UPLOAD_PRESET = 'rafstag_photos';
 
-            // ==========================================================
-            //  UPLOAD — click, drag-drop, file select
-            // ==========================================================
-            uploadZone.addEventListener('click', () => fileInput.click());
+        // ── DOM ──────────────────────────────────────────────────
+        const uploadZone = document.getElementById('uploadZone');
+        const photoGrid  = document.getElementById('photoGrid');
 
-            uploadZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadZone.style.background = 'rgba(255, 0, 0, 0.2)';
-            });
-            uploadZone.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                uploadZone.style.background = '';
-            });
-            uploadZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadZone.style.background = '';
-                const imgs = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
-                if (imgs.length) runUpload(imgs);
-            });
+        const fileInput    = document.createElement('input');
+        fileInput.type     = 'file';
+        fileInput.accept   = 'image/*';
+        fileInput.multiple = true;
+        fileInput.style.display = 'none';
+        document.body.appendChild(fileInput);
 
-            fileInput.addEventListener('change', (e) => {
-                const imgs = Array.from(e.target.files);
-                if (imgs.length) runUpload(imgs);
-                fileInput.value = '';
-            });
+        const rendered = new Set();
 
-            // ---------- upload orchestrator ----------
-            async function runUpload(files) {
-                const saved = uploadZone.innerHTML;
-                let done = 0;
+        // ── UPLOAD HANDLERS ──────────────────────────────────────
 
-                uploadZone.innerHTML = `
-                    <div class="upload-icon">⏳</div>
-                    <div class="upload-text" id="uploadProgress">Uploading 0 / ${files.length}…</div>
-                `;
-                const prog = document.getElementById('uploadProgress');
+        uploadZone.addEventListener('click', () => fileInput.click());
 
-                for (const f of files) {
-                    const result = await sendToCloudinary(f);
-                    if (result) {
-                        done++;
-                        renderPhoto(result.public_id, result.secure_url);
-                    }
-                    prog.textContent = `Uploading ${done} / ${files.length}…`;
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.style.background = 'rgba(255, 0, 0, 0.2)';
+        });
+        uploadZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadZone.style.background = '';
+        });
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.style.background = '';
+            const imgs = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+            if (imgs.length) runUpload(imgs);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const imgs = Array.from(e.target.files);
+            if (imgs.length) runUpload(imgs);
+            fileInput.value = '';
+        });
+
+        async function runUpload(files) {
+            const saved = uploadZone.innerHTML;
+            let done = 0;
+
+            uploadZone.innerHTML = `
+                <div class="upload-icon">⏳</div>
+                <div class="upload-text" id="uploadProgress">Uploading 0 / ${files.length}…</div>
+            `;
+            const prog = document.getElementById('uploadProgress');
+
+            for (const f of files) {
+                const url = await uploadToCloudinary(f);
+                if (url) {
+                    done++;
+                    // Save URL to Firebase so everyone can see it
+                    await saveToFirebase(url);
                 }
-
-                uploadZone.innerHTML = saved;
-                if (done) showNotification(`${done} photo${done > 1 ? 's' : ''} uploaded! 📸`);
+                prog.textContent = `Uploading ${done} / ${files.length}…`;
             }
 
-            // ---------- single file upload ----------
-            async function sendToCloudinary(file) {
-                const fd = new FormData();
-                fd.append('file', file);
-                fd.append('upload_preset', UPLOAD_PRESET);
-                fd.append('tags', TAG_NAME);            // ensure tag for listing
+            uploadZone.innerHTML = saved;
+            if (done) showNotification(`${done} photo${done > 1 ? 's' : ''} uploaded! 📸`);
+        }
 
-                try {
-                    const r = await fetch(
-                        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-                        { method: 'POST', body: fd }
-                    );
-                    const d = await r.json();
-                    if (d.error) {
-                        console.error('Upload error:', d.error.message);
-                        alert('Upload failed: ' + d.error.message);
-                        return null;
-                    }
-                    return d;
-                } catch (e) {
-                    console.error('Upload network error:', e);
-                    alert('Upload failed — check your connection.');
+        async function uploadToCloudinary(file) {
+            const fd = new FormData();
+            fd.append('file', file);
+            fd.append('upload_preset', UPLOAD_PRESET);
+            fd.append('tags', 'rafstag');
+
+            try {
+                const r = await fetch(
+                    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+                    { method: 'POST', body: fd }
+                );
+                const d = await r.json();
+                if (d.error) {
+                    alert('Upload failed: ' + d.error.message);
                     return null;
                 }
+                return d.secure_url;
+            } catch (e) {
+                alert('Upload failed — check your connection.');
+                return null;
             }
+        }
 
-            // ==========================================================
-            //  GALLERY — render helpers
-            // ==========================================================
-            function clearStatus() {
-                if (statusEl && statusEl.parentNode) statusEl.remove();
+        // ── FIREBASE: Save & Listen ──────────────────────────────
+
+        async function saveToFirebase(url) {
+            try {
+                await addDoc(photosRef, {
+                    url: url,
+                    uploadedAt: serverTimestamp()
+                });
+            } catch (e) {
+                console.error('Firebase save error:', e);
             }
+        }
 
-            function setStatus(msg) {
-                photoGrid.innerHTML =
-                    `<p style="color:#888;text-align:center;width:100%;padding:40px 20px;">${msg}</p>`;
-            }
+        // Real-time listener — fires immediately with all existing photos,
+        // then again whenever anyone uploads a new one
+        const q = query(photosRef, orderBy('uploadedAt', 'desc'));
 
-            function renderPhoto(publicId, directUrl) {
-                clearStatus();
-                if (renderedIds.has(publicId)) return;
-                renderedIds.add(publicId);
-
-                // Use Cloudinary transformations for consistent thumbnails
-                const src = directUrl ||
-                    `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_400,h_400,q_auto,f_auto/${publicId}`;
-
-                const div = document.createElement('div');
-                div.className = 'photo-item';
-                div.innerHTML = `<img src="${src}" alt="Stag photo" loading="lazy">`;
-                photoGrid.insertBefore(div, photoGrid.firstChild);
-            }
-
-            // ==========================================================
-            //  GALLERY — load from Cloudinary (shared across all users)
-            //
-            //  IMPORTANT: This uses the client-side resource list endpoint:
-            //    https://res.cloudinary.com/<cloud>/image/list/<tag>.json
-            //
-            //  By default this is BLOCKED (returns 401).
-            //  TO FIX:
-            //    1. Log in to https://console.cloudinary.com
-            //    2. Settings → Security
-            //    3. Under "Restricted media types", UNCHECK "Resource list"
-            //    4. Save
-            //
-            //  After that, every photo tagged "rafstag" (by any user)
-            //  will appear in the gallery for everyone.
-            //  New uploads take ~60 seconds to appear in the list.
-            // ==========================================================
-            let galleryLoaded = false;   // track first successful load
-
-            async function loadGallery() {
-                const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/${TAG_NAME}.json`;
-
-                try {
-                    const r = await fetch(url);
-
-                    if (r.status === 401) {
-                        console.error(
-                            '%c CLOUDINARY RESOURCE LIST IS RESTRICTED ',
-                            'background:red;color:white;font-size:14px;padding:4px 8px;',
-                            '\nFix: Console → Settings → Security → uncheck "Resource list" → Save'
-                        );
-                        if (!galleryLoaded) {
-                            setStatus(
-                                '⚠️ Photo gallery is not enabled yet.<br>' +
-                                '<small>Admin: Cloudinary → Settings → Security → uncheck "Resource list"</small>'
-                            );
-                        }
-                        return;
-                    }
-
-                    if (r.status === 404) {
-                        if (!galleryLoaded) setStatus('No photos yet. Be the first to upload!');
-                        return;
-                    }
-
-                    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-
-                    const data = await r.json();
-
-                    if (!data.resources || data.resources.length === 0) {
-                        if (!galleryLoaded) setStatus('No photos yet. Be the first to upload!');
-                        return;
-                    }
-
-                    galleryLoaded = true;
-                    clearStatus();
-
-                    // Sort newest first (by version number which is a unix timestamp)
-                    data.resources
-                        .sort((a, b) => (b.version || 0) - (a.version || 0))
-                        .forEach(res => renderPhoto(res.public_id, null));
-
-                } catch (e) {
-                    console.error('Gallery load error:', e);
-                    if (!galleryLoaded) {
-                        setStatus('No photos yet. Click above to upload the first one!');
+        onSnapshot(q, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                if (change.type === 'added') {
+                    const data = change.doc.data();
+                    if (data.url) {
+                        addPhotoToGrid(data.url);
                     }
                 }
+            });
+
+            // Show empty message if no photos
+            if (snapshot.empty && rendered.size === 0) {
+                showEmpty();
             }
+        }, (error) => {
+            console.error('Firebase listener error:', error);
+            showEmpty();
+        });
 
-            // Initial load
-            loadGallery();
+        // ── GALLERY RENDERING ────────────────────────────────────
 
-            // Poll every 30s so everyone sees new photos from the crew
-            setInterval(loadGallery, 30000);
+        function addPhotoToGrid(url) {
+            if (rendered.has(url)) return;
+            rendered.add(url);
 
-        })();
+            // Remove empty message if present
+            const msg = photoGrid.querySelector('.gallery-msg');
+            if (msg) msg.remove();
+
+            const div = document.createElement('div');
+            div.className = 'photo-item';
+            div.innerHTML = `<img src="${url}" alt="Stag photo" loading="lazy">`;
+            photoGrid.insertBefore(div, photoGrid.firstChild);
+        }
+
+        function showEmpty() {
+            if (rendered.size > 0) return;
+            if (photoGrid.querySelector('.gallery-msg')) return;
+            const p = document.createElement('p');
+            p.className = 'gallery-msg';
+            p.style.cssText = 'color:#888;text-align:center;width:100%;padding:40px 20px;';
+            p.textContent = 'No photos yet. Be the first to upload!';
+            photoGrid.appendChild(p);
+        }
     </script>
 </body>
 </html>
