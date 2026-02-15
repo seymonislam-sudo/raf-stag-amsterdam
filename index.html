@@ -415,10 +415,26 @@
             // File selection handler
             fileInput.addEventListener('change', async (e) => {
                 const files = Array.from(e.target.files);
+                const uploadZone = document.getElementById('uploadZone');
+                
+                // Show uploading message
+                const originalHTML = uploadZone.innerHTML;
+                uploadZone.innerHTML = `
+                    <div class="upload-icon">⏳</div>
+                    <div class="upload-text">Uploading...</div>
+                `;
                 
                 for (const file of files) {
                     await uploadToCloudinary(file);
                 }
+                
+                // Restore original upload zone
+                uploadZone.innerHTML = originalHTML;
+                
+                // Reload gallery after upload
+                setTimeout(() => {
+                    loadPhotosFromCloudinary();
+                }, 2000);
                 
                 fileInput.value = ''; // Reset input
             });
@@ -432,6 +448,7 @@
             const formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', UPLOAD_PRESET);
+            // No folder - save to root
 
             try {
                 const response = await fetch(
@@ -445,11 +462,18 @@
                 const data = await response.json();
                 
                 if (data.secure_url) {
+                    console.log('Upload successful:', data.secure_url);
                     addPhotoToGallery(data);
+                    return true;
+                } else if (data.error) {
+                    console.error('Upload error:', data.error.message);
+                    alert('Upload failed: ' + data.error.message);
+                    return false;
                 }
             } catch (error) {
                 console.error('Upload failed:', error);
-                alert('Upload failed. Please try again.');
+                alert('Upload failed. Please check your connection and try again.');
+                return false;
             }
         }
 
