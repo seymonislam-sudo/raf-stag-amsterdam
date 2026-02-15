@@ -1,370 +1,666 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAF - THE FINAL SEND-OFF TOUR | Amsterdam 2026</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Parental Advisory Banner -->
-    <div class="advisory-banner">
-        <div class="advisory-label">PARENTAL ADVISORY</div>
-        <div class="advisory-text">EXPLICIT CONTENT</div>
-    </div>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="logo">RAF TOUR 2026</div>
-            <ul class="nav-links">
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#lineup">THE LINEUP</a></li>
-                <li><a href="#tour-dates">TOUR DATES</a></li>
-                <li><a href="#setlist">SETLIST</a></li>
-                <li><a href="#gallery">BACKSTAGE</a></li>
-                <li><a href="#rules">TOUR RULES</a></li>
-            </ul>
-        </div>
-    </nav>
+body {
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <img src="raf_viking.png" alt="RAF - The Final Send-Off Tour" class="hero-image">
-            <div class="hero-text">
-                <h1 class="glitch" data-text="THE FINAL SEND-OFF TOUR">THE FINAL SEND-OFF TOUR</h1>
-                <h2>AMSTERDAM • MARCH 6-8, 2026</h2>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="days">00</span>
-                        <span class="countdown-label">DAYS</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="hours">00</span>
-                        <span class="countdown-label">HOURS</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="minutes">00</span>
-                        <span class="countdown-label">MINS</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="seconds">00</span>
-                        <span class="countdown-label">SECS</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">SCROLL FOR MORE ▼</div>
-    </section>
+/* Parental Advisory Banner */
+.advisory-banner {
+    background: #fff;
+    color: #000;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 3px solid #FF0000;
+}
 
-    <!-- The Lineup Section -->
-    <section id="lineup" class="lineup-section">
-        <h2 class="section-title">THE LINEUP</h2>
-        <div class="section-subtitle">THE WARRIORS RIDING INTO BATTLE</div>
-        
-        <div class="lineup-grid">
-            <div class="lineup-card headliner">
-                <img src="Raf2.PNG" alt="Raf">
-                <div class="lineup-name">RAF</div>
-                <div class="lineup-role">HEADLINER • THE GROOM</div>
-                <div class="lineup-bio">"One last ride before the ball and chain"</div>
-            </div>
-            
-            <!-- The Crew -->
-            <div class="lineup-card">
-                <img src="Julien.PNG" alt="Julien">
-                <div class="lineup-name">JULIEN</div>
-                <div class="lineup-role">BEST MAN • TALL FRENCH GUY</div>
-            </div>
-            
-            <div class="lineup-card">
-                <img src="Stam.PNG" alt="Stam">
-                <div class="lineup-name">STAM</div>
-                <div class="lineup-role">THE DUTCH GUY • TALL</div>
-            </div>
-            
-            <div class="lineup-card">
-                <img src="Antoine.PNG" alt="Antoine">
-                <div class="lineup-name">ANTOINE</div>
-                <div class="lineup-role">TALL FRENCH GUY</div>
-            </div>
+.advisory-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+}
 
-            <div class="lineup-card">
-                <img src="Seymon.PNG" alt="Seymon">
-                <div class="lineup-name">SEYMON</div>
-                <div class="lineup-role">THE BOSS</div>
-            </div>
+.advisory-text {
+    font-size: 14px;
+    letter-spacing: 3px;
+}
 
-            <div class="lineup-card">
-                <img src="Pretesh.PNG" alt="Pretesh">
-                <div class="lineup-name">PRETESH</div>
-                <div class="lineup-role">THE SHORT GUY</div>
-            </div>
+/* Navigation */
+.main-nav {
+    background: rgba(0, 0, 0, 0.95);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid #FF0000;
+    backdrop-filter: blur(10px);
+}
 
-            <div class="lineup-card">
-                <div class="lineup-placeholder">💻</div>
-                <div class="lineup-name">VENKAT</div>
-                <div class="lineup-role">THE TECH GUY</div>
-            </div>
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
 
-            <div class="lineup-card">
-                <div class="lineup-placeholder">🇷🇺</div>
-                <div class="lineup-name">YEVGENY</div>
-                <div class="lineup-role">THE RUSSIAN</div>
-            </div>
+.logo {
+    font-size: 24px;
+    color: #FF0000;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 0 #fff;
+}
 
-            <div class="lineup-card">
-                <div class="lineup-placeholder">1️⃣</div>
-                <div class="lineup-name">DAN 1</div>
-                <div class="lineup-role">THE CREW</div>
-            </div>
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
 
-            <div class="lineup-card">
-                <div class="lineup-placeholder">2️⃣</div>
-                <div class="lineup-name">DAN 2</div>
-                <div class="lineup-role">THE CREW</div>
-            </div>
-        </div>
-    </section>
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    position: relative;
+}
 
-    <!-- Tour Dates / Itinerary -->
-    <section id="tour-dates" class="tour-dates-section">
-        <h2 class="section-title">TOUR DATES</h2>
-        <div class="section-subtitle">3 NIGHTS OF CHAOS</div>
-        
-        <div class="tour-schedule">
-            <!-- Day 1 -->
-            <div class="tour-day">
-                <div class="day-header">
-                    <div class="day-number">DAY 1</div>
-                    <div class="day-date">FRIDAY, MARCH 6</div>
-                </div>
-                <div class="day-events">
-                    <div class="event">
-                        <div class="event-time">14:00</div>
-                        <div class="event-details">
-                            <div class="event-name">ARRIVAL & CHECK-IN</div>
-                            <div class="event-location">📍 Hotel TBC</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">16:00</div>
-                        <div class="event-details">
-                            <div class="event-name">FIRST PINTS</div>
-                            <div class="event-location">📍 Local Pub TBC</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">19:00</div>
-                        <div class="event-details">
-                            <div class="event-name">DINNER</div>
-                            <div class="event-location">📍 Restaurant TBC</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">22:00</div>
-                        <div class="event-details">
-                            <div class="event-name">RED LIGHT DISTRICT TOUR</div>
-                            <div class="event-location">📍 You know where</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+.nav-links a:hover {
+    color: #FF0000;
+}
 
-            <!-- Day 2 -->
-            <div class="tour-day">
-                <div class="day-header">
-                    <div class="day-number">DAY 2</div>
-                    <div class="day-date">SATURDAY, MARCH 7</div>
-                </div>
-                <div class="day-events">
-                    <div class="event">
-                        <div class="event-time">10:00</div>
-                        <div class="event-details">
-                            <div class="event-name">RECOVERY BREAKFAST</div>
-                            <div class="event-location">📍 Hotel</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">13:00</div>
-                        <div class="event-details">
-                            <div class="event-name">ACTIVITY TBC</div>
-                            <div class="event-location">📍 Shooting Range / Go-Karts / Beer Bikes?</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">18:00</div>
-                        <div class="event-details">
-                            <div class="event-name">PUB CRAWL BEGINS</div>
-                            <div class="event-location">📍 Leidseplein Area</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">23:00</div>
-                        <div class="event-details">
-                            <div class="event-name">CLUB NIGHT</div>
-                            <div class="event-location">📍 Paradiso / Melkweg TBC</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #FF0000;
+    transition: width 0.3s;
+}
 
-            <!-- Day 3 -->
-            <div class="tour-day">
-                <div class="day-header">
-                    <div class="day-number">DAY 3</div>
-                    <div class="day-date">SUNDAY, MARCH 8</div>
-                </div>
-                <div class="day-events">
-                    <div class="event">
-                        <div class="event-time">11:00</div>
-                        <div class="event-details">
-                            <div class="event-name">FINAL BRUNCH</div>
-                            <div class="event-location">📍 TBC</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">14:00</div>
-                        <div class="event-details">
-                            <div class="event-name">CHECK OUT & DEPARTURE</div>
-                            <div class="event-location">📍 Hotel</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">∞</div>
-                        <div class="event-details">
-                            <div class="event-name">MEMORIES FOREVER</div>
-                            <div class="event-location">📍 In our hearts (and photos)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+.nav-links a:hover::after {
+    width: 100%;
+}
 
-    <!-- Setlist / Activities -->
-    <section id="setlist" class="setlist-section">
-        <h2 class="section-title">THE SETLIST</h2>
-        <div class="section-subtitle">GREATEST HITS</div>
-        
-        <div class="setlist">
-            <div class="setlist-item">
-                <span class="track-number">01</span>
-                <span class="track-name">Canal Cruise & Beers</span>
-                <span class="track-duration">🍺🍺🍺</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">02</span>
-                <span class="track-name">Heineken Experience</span>
-                <span class="track-duration">🍺🍺🍺</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">03</span>
-                <span class="track-name">Coffee Shop Tour (Educational)</span>
-                <span class="track-duration">🌿🌿🌿</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">04</span>
-                <span class="track-name">Red Light District</span>
-                <span class="track-duration">🔴🔴🔴</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">05</span>
-                <span class="track-name">Dam Square Mayhem</span>
-                <span class="track-duration">🎉🎉🎉</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">06</span>
-                <span class="track-name">Stag Costume Reveal</span>
-                <span class="track-duration">👑👑👑</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">07</span>
-                <span class="track-name">Epic Night Out</span>
-                <span class="track-duration">🔥🔥🔥</span>
-            </div>
-            <div class="setlist-item encore">
-                <span class="track-number">ENCORE</span>
-                <span class="track-name">3AM Kebabs & Regrets</span>
-                <span class="track-duration">🌯💀</span>
-            </div>
-        </div>
-    </section>
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: linear-gradient(180deg, #000 0%, #1a0000 100%);
+    padding: 40px 20px;
+}
 
-    <!-- Photo Gallery -->
-    <section id="gallery" class="gallery-section">
-        <h2 class="section-title">BACKSTAGE PASS</h2>
-        <div class="section-subtitle">UPLOAD YOUR PHOTOS FROM THE TOUR</div>
-        
-        <div class="upload-zone" id="uploadZone">
-            <div class="upload-icon">📸</div>
-            <div class="upload-text">Click or Drag Photos Here</div>
-            <div class="upload-subtext">Share the chaos with the crew</div>
-            <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
-        </div>
+.hero-content {
+    text-align: center;
+    max-width: 1200px;
+}
 
-        <div class="photo-grid" id="photoGrid">
-            <!-- Photos will be added here dynamically -->
-        </div>
-    </section>
+.hero-image {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 40px;
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.5));
+    animation: pulse 3s ease-in-out infinite;
+}
 
-    <!-- Tour Rules -->
-    <section id="rules" class="rules-section">
-        <h2 class="section-title">TOUR RULES</h2>
-        <div class="section-subtitle">BREAK THEM AT YOUR PERIL</div>
-        
-        <div class="rules-container">
-            <div class="rule-card">
-                <div class="rule-number">01</div>
-                <div class="rule-text">What happens in Amsterdam, gets posted in the group chat</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">02</div>
-                <div class="rule-text">The groom drinks for free (or pays double, we'll decide)</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">03</div>
-                <div class="rule-text">No man left behind (unless he's being arrested)</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">04</div>
-                <div class="rule-text">Costume must be worn at all times on Day 2</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">05</div>
-                <div class="rule-text">Forfeit drinks for: mentioning the wedding, checking work emails, boring conversation</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">06</div>
-                <div class="rule-text">Photos or it didn't happen</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">07</div>
-                <div class="rule-text">Emergency contact: Don't call anyone, we're adults</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">08</div>
-                <div class="rule-text">What Raf says, goes. Except when he's too drunk to talk.</div>
-            </div>
-        </div>
-    </section>
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">RAF • THE FINAL SEND-OFF TOUR</div>
-            <div class="footer-text">AMSTERDAM • MARCH 6-8, 2026</div>
-            <div class="footer-warning">⚠️ PARENTAL ADVISORY: EXPLICIT CONTENT ⚠️</div>
-            <div class="footer-links">
-                <a href="#home">HOME</a>
-                <a href="#lineup">LINEUP</a>
-                <a href="#tour-dates">DATES</a>
-                <a href="#gallery">PHOTOS</a>
-            </div>
-        </div>
-    </footer>
+.hero-text h1 {
+    font-size: clamp(32px, 6vw, 72px);
+    color: #FF0000;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    text-shadow: 
+        3px 3px 0 #fff,
+        6px 6px 0 #000;
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+.hero-text h2 {
+    font-size: clamp(20px, 3vw, 36px);
+    color: #fff;
+    letter-spacing: 8px;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Countdown Timer */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.countdown-item {
+    text-align: center;
+}
+
+.countdown-value {
+    display: block;
+    font-size: 60px;
+    color: #FF0000;
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 0 #fff,
+        4px 4px 0 #000;
+}
+
+.countdown-label {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+/* Section Styles */
+section {
+    padding: 100px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: clamp(36px, 5vw, 64px);
+    color: #FF0000;
+    text-align: center;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    text-shadow: 
+        3px 3px 0 #fff,
+        6px 6px 0 #000;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+    letter-spacing: 4px;
+    margin-bottom: 60px;
+}
+
+/* Lineup Section */
+.lineup-section {
+    background: linear-gradient(180deg, #1a0000 0%, #000 100%);
+}
+
+.lineup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.lineup-card {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.lineup-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.lineup-card:hover::before {
+    left: 100%;
+}
+
+.lineup-card.headliner {
+    border-color: #FF0000;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+}
+
+.lineup-card:hover {
+    transform: translateY(-10px);
+    border-color: #FF0000;
+}
+
+.lineup-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    filter: grayscale(100%) contrast(120%);
+    transition: filter 0.3s;
+}
+
+.lineup-card:hover img {
+    filter: grayscale(0%) contrast(100%);
+}
+
+.lineup-placeholder {
+    width: 100%;
+    height: 250px;
+    background: #1a1a1a;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    margin-bottom: 20px;
+    border: 2px dashed #333;
+}
+
+.lineup-name {
+    font-size: 24px;
+    color: #FF0000;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.lineup-role {
+    font-size: 12px;
+    color: #999;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.lineup-bio {
+    font-size: 14px;
+    color: #ccc;
+    font-style: italic;
+    font-family: Arial, sans-serif;
+}
+
+/* Tour Dates Section */
+.tour-dates-section {
+    background: #000;
+}
+
+.tour-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.tour-day {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+    border-left: 4px solid #FF0000;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #333;
+}
+
+.day-number {
+    font-size: 48px;
+    color: #FF0000;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.day-date {
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.day-events {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    background: rgba(255, 0, 0, 0.05);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.event:hover {
+    background: rgba(255, 0, 0, 0.1);
+    transform: translateX(10px);
+}
+
+.event-time {
+    font-size: 32px;
+    color: #FF0000;
+    min-width: 100px;
+    font-weight: bold;
+}
+
+.event-details {
+    flex: 1;
+}
+
+.event-name {
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.event-location {
+    font-size: 14px;
+    color: #999;
+    font-family: Arial, sans-serif;
+}
+
+/* Setlist Section */
+.setlist-section {
+    background: linear-gradient(180deg, #000 0%, #1a0000 100%);
+}
+
+.setlist {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.setlist-item {
+    display: grid;
+    grid-template-columns: 60px 1fr 100px;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.setlist-item:hover {
+    background: rgba(255, 0, 0, 0.1);
+    border-color: #FF0000;
+}
+
+.setlist-item.encore {
+    background: rgba(255, 0, 0, 0.2);
+    border: 2px solid #FF0000;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.track-number {
+    font-size: 24px;
+    color: #FF0000;
+    font-weight: bold;
+}
+
+.track-name {
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.track-duration {
+    font-size: 20px;
+    text-align: right;
+}
+
+/* Gallery Section */
+.gallery-section {
+    background: #000;
+}
+
+.upload-zone {
+    max-width: 600px;
+    margin: 0 auto 60px;
+    padding: 60px;
+    border: 3px dashed #FF0000;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(255, 0, 0, 0.05);
+}
+
+.upload-zone:hover {
+    background: rgba(255, 0, 0, 0.1);
+    border-color: #fff;
+}
+
+.upload-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.upload-text {
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.upload-subtext {
+    font-size: 14px;
+    color: #999;
+    font-family: Arial, sans-serif;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid #333;
+    transition: all 0.3s;
+}
+
+.photo-item:hover {
+    border-color: #FF0000;
+    transform: scale(1.05);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Rules Section */
+.rules-section {
+    background: linear-gradient(180deg, #1a0000 0%, #000 100%);
+}
+
+.rules-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.rule-card {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+    border: 2px solid #333;
+    border-left: 4px solid #FF0000;
+    padding: 30px;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.rule-card:hover {
+    transform: translateX(10px);
+    border-color: #FF0000;
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+}
+
+.rule-number {
+    font-size: 48px;
+    color: #FF0000;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.rule-text {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+}
+
+/* Footer */
+.footer {
+    background: #000;
+    border-top: 3px solid #FF0000;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 32px;
+    color: #FF0000;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0 #fff;
+}
+
+.footer-text {
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.footer-warning {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #FF0000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .countdown {
+        gap: 20px;
+    }
+    
+    .countdown-value {
+        font-size: 40px;
+    }
+    
+    .day-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .event {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .event-time {
+        min-width: auto;
+    }
+    
+    .setlist-item {
+        grid-template-columns: 40px 1fr;
+        gap: 15px;
+    }
+    
+    .track-duration {
+        grid-column: 2;
+        text-align: left;
+        margin-top: 5px;
+    }
+}
+
+/* Glitch effect for main title */
+.glitch {
+    position: relative;
+    animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+    0%, 90%, 100% {
+        transform: translate(0);
+    }
+    92% {
+        transform: translate(-2px, 2px);
+    }
+    94% {
+        transform: translate(2px, -2px);
+    }
+    96% {
+        transform: translate(-2px, -2px);
+    }
+    98% {
+        transform: translate(2px, 2px);
+    }
+}
