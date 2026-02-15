@@ -495,7 +495,7 @@
             try {
                 // Using Cloudinary's client-side search
                 const response = await fetch(
-                    `https://res.cloudinary.com/${CLOUD_NAME}/image/list/Rafstag.json`
+                   `https://res.cloudinary.com/${CLOUD_NAME}/image/list.json`
                 );
                 
                 if (!response.ok) {
