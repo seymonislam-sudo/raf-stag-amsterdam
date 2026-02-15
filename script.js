@@ -37,80 +37,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Photo Upload Functionality
-const uploadZone = document.getElementById('uploadZone');
-const fileInput = document.getElementById('fileInput');
-const photoGrid = document.getElementById('photoGrid');
-
-// Store photos in localStorage
-let uploadedPhotos = JSON.parse(localStorage.getItem('stagPhotos')) || [];
-
-// Load existing photos
-function loadPhotos() {
-    photoGrid.innerHTML = '';
-    uploadedPhotos.forEach((photoData, index) => {
-        addPhotoToGrid(photoData, index);
-    });
-}
-
-// Add photo to grid
-function addPhotoToGrid(photoData, index) {
-    const photoItem = document.createElement('div');
-    photoItem.className = 'photo-item';
-    photoItem.innerHTML = `
-        <img src="${photoData}" alt="Stag photo ${index + 1}">
-    `;
-    photoGrid.appendChild(photoItem);
-}
-
-// Handle file selection
-fileInput.addEventListener('change', function(e) {
-    const files = e.target.files;
-    handleFiles(files);
-});
-
-// Click to upload
-uploadZone.addEventListener('click', function() {
-    fileInput.click();
-});
-
-// Drag and drop
-uploadZone.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    uploadZone.style.background = 'rgba(255, 0, 0, 0.2)';
-});
-
-uploadZone.addEventListener('dragleave', function(e) {
-    e.preventDefault();
-    uploadZone.style.background = 'rgba(255, 0, 0, 0.05)';
-});
-
-uploadZone.addEventListener('drop', function(e) {
-    e.preventDefault();
-    uploadZone.style.background = 'rgba(255, 0, 0, 0.05)';
-    const files = e.dataTransfer.files;
-    handleFiles(files);
-});
-
-// Process uploaded files
-function handleFiles(files) {
-    for (let file of files) {
-        if (file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const photoData = e.target.result;
-                uploadedPhotos.push(photoData);
-                localStorage.setItem('stagPhotos', JSON.stringify(uploadedPhotos));
-                addPhotoToGrid(photoData, uploadedPhotos.length - 1);
-                
-                // Show success message
-                showNotification('Photo uploaded! 📸');
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-}
-
 // Notification system
 function showNotification(message) {
     const notification = document.createElement('div');
@@ -165,9 +91,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Load photos on page load
-loadPhotos();
-
 // Add parallax effect to hero
 window.addEventListener('scroll', function() {
     const scrolled = window.pageYOffset;
@@ -177,10 +100,12 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Mobile menu toggle (if needed in future)
+// Mobile menu toggle
 const logo = document.querySelector('.logo');
-logo.addEventListener('dblclick', function() {
-    document.querySelectorAll('.nav-links').forEach(nav => {
-        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+if (logo) {
+    logo.addEventListener('dblclick', function() {
+        document.querySelectorAll('.nav-links').forEach(nav => {
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
     });
-});
+}
