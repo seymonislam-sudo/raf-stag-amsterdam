@@ -1,68 +1,4 @@
 // =============================================
-// AUDIO — THEME TOGGLE SOUNDS
-// =============================================
-
-let audioCtx = null;
-
-function getAudioContext() {
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    return audioCtx;
-}
-
-// Distorted power chord (switching TO rock)
-function playGuitarRiff() {
-    try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        [164.81, 246.94, 329.63].forEach((freq, i) => {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            const dist = ctx.createWaveShaper();
-            const curve = new Float32Array(44100);
-            for (let j = 0; j < 44100; j++) {
-                const x = (j * 2) / 44100 - 1;
-                curve[j] = (Math.PI + 200) * x / (Math.PI + 200 * Math.abs(x));
-            }
-            dist.curve = curve;
-            dist.oversample = '4x';
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(freq, now);
-            gain.gain.setValueAtTime(0, now);
-            gain.gain.linearRampToValueAtTime(0.12, now + 0.02);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
-            osc.connect(dist);
-            dist.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(now + i * 0.02);
-            osc.stop(now + 0.7);
-        });
-    } catch (e) { /* Audio unavailable */ }
-}
-
-// Clean corporate chime (switching TO corporate)
-function playCorporateDing() {
-    try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, now);
-        osc.frequency.setValueAtTime(1318.5, now + 0.1);
-        osc.frequency.setValueAtTime(1760, now + 0.2);
-        gain.gain.setValueAtTime(0, now);
-        gain.gain.linearRampToValueAtTime(0.18, now + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.9);
-    } catch (e) { /* Audio unavailable */ }
-}
-
-// =============================================
 // THEME TOGGLE — TEXT SWAP MAPPINGS
 // Mapped to your ACTUAL site content
 // =============================================
@@ -288,25 +224,32 @@ function applyThemeText(source) {
         const src = img.getAttribute('src');
         if (!src) return;
         if (source === corporateText) {
-            // Add _corp before extension
             if (!src.includes('_corp')) {
                 img.setAttribute('src', src.replace(/(\.\w+)$/, '_corp$1'));
             }
         } else {
-            // Remove _corp
             img.setAttribute('src', src.replace('_corp', ''));
         }
     });
+
+    // Swap hero image (raf_viking.png ↔ raf_viking_corp.png)
+    const heroImg = document.querySelector('.hero-image');
+    if (heroImg) {
+        const src = heroImg.getAttribute('src');
+        if (source === corporateText) {
+            if (!src.includes('_corp')) {
+                heroImg.setAttribute('src', src.replace(/(\.\w+)$/, '_corp$1'));
+            }
+        } else {
+            heroImg.setAttribute('src', src.replace('_corp', ''));
+        }
+    }
 }
 
 function toggleTheme() {
     const html = document.documentElement;
     const current = html.getAttribute('data-theme');
     const next = current === 'rock' ? 'corporate' : 'rock';
-
-    // Sound
-    if (next === 'corporate') playCorporateDing();
-    else playGuitarRiff();
 
     // Flash
     createFlash();
