@@ -1,10 +1,456 @@
 <!DOCTYPE html>
+
 <html lang="en" data-theme="rock">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAF - THE FINAL SEND-OFF TOUR | Amsterdam 2026</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ===== VOTING SECTION ===== */
+        .voting-section {
+            padding: 80px 20px;
+            background: #0a0a0a;
+        }
+
+```
+    [data-theme="corporate"] .voting-section {
+        background: #f4f6f9;
+    }
+
+    /* Who are you? */
+    .voter-identity {
+        max-width: 500px;
+        margin: 0 auto 50px;
+        background: #111;
+        border: 1px solid #2a2a2a;
+        border-radius: 4px;
+        padding: 28px;
+        text-align: center;
+    }
+
+    [data-theme="corporate"] .voter-identity {
+        background: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .voter-identity label {
+        display: block;
+        font-family: 'Courier New', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        color: #ff0000;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+
+    [data-theme="corporate"] .voter-identity label {
+        color: #003087;
+    }
+
+    .voter-identity select {
+        width: 100%;
+        padding: 12px 16px;
+        background: #000;
+        border: 1px solid #333;
+        color: #fff;
+        font-family: 'Courier New', monospace;
+        font-size: 1rem;
+        border-radius: 2px;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+    [data-theme="corporate"] .voter-identity select {
+        background: #f8f9fa;
+        border: 1px solid #ccc;
+        color: #1a1a2e;
+    }
+
+    .identity-note {
+        margin-top: 10px;
+        font-size: 0.72rem;
+        color: #555;
+        font-family: 'Courier New', monospace;
+        letter-spacing: 1px;
+    }
+
+    [data-theme="corporate"] .identity-note {
+        color: #888;
+    }
+
+    /* Suggest form */
+    .suggest-form {
+        max-width: 600px;
+        margin: 0 auto 50px;
+        background: #111;
+        border: 1px solid #2a2a2a;
+        border-radius: 4px;
+        padding: 28px;
+    }
+
+    [data-theme="corporate"] .suggest-form {
+        background: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .suggest-form h3 {
+        font-family: 'Courier New', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        color: #ff0000;
+        text-transform: uppercase;
+        margin: 0 0 20px 0;
+    }
+
+    [data-theme="corporate"] .suggest-form h3 {
+        color: #003087;
+    }
+
+    .suggest-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .suggest-row input,
+    .suggest-row select,
+    .suggest-form textarea {
+        padding: 12px 14px;
+        background: #000;
+        border: 1px solid #333;
+        color: #fff;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        border-radius: 2px;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+
+    .suggest-row input:focus,
+    .suggest-row select:focus,
+    .suggest-form textarea:focus {
+        border-color: #ff0000;
+    }
+
+    [data-theme="corporate"] .suggest-row input,
+    [data-theme="corporate"] .suggest-row select,
+    [data-theme="corporate"] .suggest-form textarea {
+        background: #f8f9fa;
+        border: 1px solid #ccc;
+        color: #1a1a2e;
+    }
+
+    [data-theme="corporate"] .suggest-row input:focus,
+    [data-theme="corporate"] .suggest-row select:focus,
+    [data-theme="corporate"] .suggest-form textarea:focus {
+        border-color: #003087;
+    }
+
+    .suggest-row input.suggest-title {
+        flex: 1;
+    }
+
+    .suggest-row select.suggest-cat {
+        width: 160px;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .suggest-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+        resize: vertical;
+        min-height: 70px;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    .suggest-btn {
+        background: #ff0000;
+        color: #fff;
+        border: none;
+        padding: 12px 28px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: background 0.2s, transform 0.1s;
+    }
+
+    .suggest-btn:hover {
+        background: #cc0000;
+        transform: translateY(-1px);
+    }
+
+    .suggest-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    [data-theme="corporate"] .suggest-btn {
+        background: #003087;
+    }
+
+    [data-theme="corporate"] .suggest-btn:hover {
+        background: #002060;
+    }
+
+    .locked-notice {
+        display: none;
+        text-align: center;
+        padding: 12px;
+        background: #ff000011;
+        border: 1px solid #ff000033;
+        border-radius: 4px;
+        color: #ff0000;
+        font-family: 'Courier New', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+        margin-bottom: 14px;
+    }
+
+    [data-theme="corporate"] .locked-notice {
+        background: #00308711;
+        border-color: #00308733;
+        color: #003087;
+    }
+
+    /* Filter buttons */
+    .suggestions-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .suggestions-filter {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        padding: 7px 16px;
+        background: transparent;
+        border: 1px solid #2a2a2a;
+        color: #555;
+        font-family: 'Courier New', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: all 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+        border-color: #ff0000;
+        color: #ff0000;
+    }
+
+    [data-theme="corporate"] .filter-btn {
+        border-color: #ddd;
+        color: #888;
+    }
+
+    [data-theme="corporate"] .filter-btn.active,
+    [data-theme="corporate"] .filter-btn:hover {
+        border-color: #003087;
+        color: #003087;
+    }
+
+    /* Suggestion cards */
+    .suggestion-card {
+        background: #111;
+        border: 1px solid #1e1e1e;
+        border-radius: 4px;
+        padding: 18px 20px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        transition: border-color 0.2s;
+    }
+
+    .suggestion-card:hover {
+        border-color: #333;
+    }
+
+    [data-theme="corporate"] .suggestion-card {
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .suggestion-card.voted-by-me {
+        border-color: #ff000055;
+    }
+
+    [data-theme="corporate"] .suggestion-card.voted-by-me {
+        border-color: #00308755;
+    }
+
+    /* Vote button */
+    .vote-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        background: transparent;
+        border: 1px solid #2a2a2a;
+        color: #555;
+        width: 50px;
+        min-width: 50px;
+        padding: 10px 0;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: 'Courier New', monospace;
+        font-size: 0.75rem;
+        transition: all 0.15s;
+    }
+
+    .vote-btn:hover {
+        border-color: #ff0000;
+        color: #ff0000;
+    }
+
+    .vote-btn.voted {
+        background: #ff0000;
+        border-color: #ff0000;
+        color: #fff;
+    }
+
+    [data-theme="corporate"] .vote-btn {
+        border-color: #ddd;
+        color: #aaa;
+    }
+
+    [data-theme="corporate"] .vote-btn:hover {
+        border-color: #003087;
+        color: #003087;
+    }
+
+    [data-theme="corporate"] .vote-btn.voted {
+        background: #003087;
+        border-color: #003087;
+        color: #fff;
+    }
+
+    .vote-arrow { font-size: 1rem; line-height: 1; }
+    .vote-count { font-size: 1rem; font-weight: bold; }
+
+    /* Card content */
+    .suggestion-content { flex: 1; min-width: 0; }
+
+    .suggestion-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+        flex-wrap: wrap;
+    }
+
+    .suggestion-title {
+        font-family: 'Courier New', monospace;
+        font-size: 0.95rem;
+        color: #fff;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    [data-theme="corporate"] .suggestion-title {
+        color: #1a1a2e;
+    }
+
+    .suggestion-category {
+        font-family: 'Courier New', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 2px;
+    }
+
+    .cat-activity .suggestion-category {
+        background: #ff000022;
+        color: #ff0000;
+        border: 1px solid #ff000044;
+    }
+
+    .cat-place .suggestion-category {
+        background: #00aaff22;
+        color: #00aaff;
+        border: 1px solid #00aaff44;
+    }
+
+    .cat-food .suggestion-category {
+        background: #ffaa0022;
+        color: #ffaa00;
+        border: 1px solid #ffaa0044;
+    }
+
+    .cat-other .suggestion-category {
+        background: #aa00ff22;
+        color: #aa00ff;
+        border: 1px solid #aa00ff44;
+    }
+
+    [data-theme="corporate"] .suggestion-category {
+        background: #003087;
+        color: #fff;
+        border: 1px solid #003087;
+    }
+
+    .suggestion-desc {
+        font-family: 'Courier New', monospace;
+        font-size: 0.78rem;
+        color: #555;
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }
+
+    [data-theme="corporate"] .suggestion-desc { color: #666; }
+
+    .suggestion-meta {
+        font-family: 'Courier New', monospace;
+        font-size: 0.65rem;
+        color: #3a3a3a;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+    }
+
+    [data-theme="corporate"] .suggestion-meta { color: #aaa; }
+
+    .voters-list {
+        font-family: 'Courier New', monospace;
+        font-size: 0.68rem;
+        color: #ff0000;
+        letter-spacing: 1px;
+    }
+
+    [data-theme="corporate"] .voters-list { color: #003087; }
+
+    .no-suggestions {
+        text-align: center;
+        padding: 50px 20px;
+        color: #2a2a2a;
+        font-family: 'Courier New', monospace;
+        font-size: 0.78rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    [data-theme="corporate"] .no-suggestions { color: #bbb; }
+</style>
+```
+
 </head>
 <body>
     <!-- Parental Advisory Banner (Rock theme) -->
@@ -13,557 +459,696 @@
         <div class="advisory-text">EXPLICIT CONTENT</div>
     </div>
 
-    <!-- Corporate Banner (hidden by default) -->
-    <div class="corporate-banner" id="corporateBanner">
-        <div class="corporate-banner-text">J.P. MORGAN &mdash; CONFIDENTIAL &mdash; FOR INTERNAL USE ONLY</div>
+```
+<!-- Corporate Banner (hidden by default) -->
+<div class="corporate-banner" id="corporateBanner">
+    <div class="corporate-banner-text">J.P. MORGAN &mdash; CONFIDENTIAL &mdash; FOR INTERNAL USE ONLY</div>
+</div>
+
+<!-- Theme Toggle Button -->
+<button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <span class="toggle-icon rock-icon">🎸</span>
+    <span class="toggle-icon corp-icon">💼</span>
+</button>
+
+<!-- WhatsApp Group Chat Float -->
+<a href="https://chat.whatsapp.com/FA7SSTCp6rc0Yq2JHGkPKU?mode=gi_t" target="_blank" class="whatsapp-float" id="whatsappFloat" title="Group Chat">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+</a>
+
+<!-- Navigation -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <div class="logo" id="navLogo">RAF TOUR 2026</div>
+        <ul class="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#lineup">THE LINEUP</a></li>
+            <li><a href="#tour-dates">TOUR DATES</a></li>
+            <li><a href="#setlist">SETLIST</a></li>
+            <li><a href="#vote">VOTE</a></li>
+            <li><a href="#gallery">BACKSTAGE</a></li>
+            <li><a href="#rules">TOUR RULES</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <img src="raf_viking.png" alt="RAF - The Final Send-Off Tour" class="hero-image">
+        <div class="hero-text">
+            <h1 class="glitch" data-text="THE FINAL SEND-OFF TOUR" id="heroTitle">THE FINAL SEND-OFF TOUR</h1>
+            <h2 id="heroSubtitle">AMSTERDAM • MARCH 6-8, 2026</h2>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">DAYS</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">HOURS</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">MINS</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">SECS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">SCROLL FOR MORE ▼</div>
+    <div id="confettiContainer"></div>
+</section>
+
+<!-- The Lineup Section -->
+<section id="lineup" class="lineup-section">
+    <h2 class="section-title">THE LINEUP</h2>
+    <div class="section-subtitle">THE WARRIORS RIDING INTO BATTLE</div>
+    <div class="lineup-grid">
+        <div class="lineup-card headliner">
+            <img src="Raf2.PNG" alt="Raf">
+            <div class="lineup-name">RAF</div>
+            <div class="lineup-role">HEADLINER • THE GROOM</div>
+            <div class="lineup-bio">"One last ride before the ball and chain"</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Julien.PNG" alt="Julien">
+            <div class="lineup-name">JULIEN</div>
+            <div class="lineup-role">BEST MAN • TALL FRENCH GUY</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Stam.PNG" alt="Stam">
+            <div class="lineup-name">STAM</div>
+            <div class="lineup-role">THE DUTCH GUY • TALL</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Antoine.PNG" alt="Antoine">
+            <div class="lineup-name">ANTOINE</div>
+            <div class="lineup-role">TALL FRENCH GUY</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Seymon.PNG" alt="Seymon">
+            <div class="lineup-name">SEYMON</div>
+            <div class="lineup-role">THE BOSS</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Pretesh.PNG" alt="Pretesh">
+            <div class="lineup-name">PRETESH</div>
+            <div class="lineup-role">THE SHORT GUY</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Venkat.PNG" alt="Venkat">
+            <div class="lineup-name">VENKAT</div>
+            <div class="lineup-role">THE TECH GUY</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Evgeni.PNG" alt="Evgeni">
+            <div class="lineup-name">EVGENI</div>
+            <div class="lineup-role">THE CREW</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Daniel.PNG" alt="Daniel">
+            <div class="lineup-name">DAN</div>
+            <div class="lineup-role">THE CREW</div>
+        </div>
+        <div class="lineup-card">
+            <img src="Dave.PNG" alt="Dave">
+            <div class="lineup-name">DAVE</div>
+            <div class="lineup-role">THE CREW</div>
+        </div>
+    </div>
+</section>
+
+<!-- Tour Dates / Itinerary -->
+<section id="tour-dates" class="tour-dates-section">
+    <h2 class="section-title">TOUR DATES</h2>
+    <div class="section-subtitle">3 NIGHTS OF CHAOS</div>
+    <div class="tour-schedule">
+        <div class="tour-day">
+            <div class="day-header">
+                <div class="day-number">DAY 1</div>
+                <div class="day-date">FRIDAY, MARCH 6</div>
+            </div>
+            <div class="day-events">
+                <div class="event">
+                    <div class="event-time">15:30</div>
+                    <div class="event-details">
+                        <div class="event-name">LEAVE CANARY WHARF</div>
+                        <div class="event-location">📍 DLR to London City Airport</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">17:05</div>
+                    <div class="event-details">
+                        <div class="event-name">WHEELS UP</div>
+                        <div class="event-location">📍 BA8459 departs London City</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">19:15</div>
+                    <div class="event-details">
+                        <div class="event-name">TOUCHDOWN AMSTERDAM</div>
+                        <div class="event-location">📍 Schiphol Airport</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">20:30</div>
+                    <div class="event-details">
+                        <div class="event-name">HOTEL CHECK-IN</div>
+                        <div class="event-location">📍 <a href="https://www.google.com/maps/search/?api=1&query=NH+Amsterdam+Leidseplein+Stadhouderskade+7+Amsterdam" target="_blank" style="color: inherit; text-decoration: underline;">NH Amsterdam Leidseplein</a><br>Stadhouderskade 7, 1054 ES Amsterdam</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">21:30</div>
+                    <div class="event-details">
+                        <div class="event-name">FIRST PINTS & DINNER</div>
+                        <div class="event-location">📍 Leidseplein Area</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">00:00</div>
+                    <div class="event-details">
+                        <div class="event-name">LATE NIGHT EXPLORATION</div>
+                        <div class="event-location">📍 You know where...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tour-day">
+            <div class="day-header">
+                <div class="day-number">DAY 2</div>
+                <div class="day-date">SATURDAY, MARCH 7</div>
+            </div>
+            <div class="day-events">
+                <div class="event">
+                    <div class="event-time">10:00</div>
+                    <div class="event-details">
+                        <div class="event-name">RECOVERY BREAKFAST</div>
+                        <div class="event-location">📍 Hotel</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">13:00</div>
+                    <div class="event-details">
+                        <div class="event-name">ACTIVITY TBC</div>
+                        <div class="event-location">📍 Shooting Range / Go-Karts / Beer Bikes?</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">18:00</div>
+                    <div class="event-details">
+                        <div class="event-name">PUB CRAWL BEGINS</div>
+                        <div class="event-location">📍 Leidseplein Area</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">23:00</div>
+                    <div class="event-details">
+                        <div class="event-name">CLUB NIGHT</div>
+                        <div class="event-location">📍 Paradiso / Melkweg TBC</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tour-day">
+            <div class="day-header">
+                <div class="day-number">DAY 3</div>
+                <div class="day-date">SUNDAY, MARCH 8</div>
+            </div>
+            <div class="day-events">
+                <div class="event">
+                    <div class="event-time">10:00</div>
+                    <div class="event-details">
+                        <div class="event-name">RECOVERY BRUNCH</div>
+                        <div class="event-location">📍 Hotel / Local Spot</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">12:00</div>
+                    <div class="event-details">
+                        <div class="event-name">HOTEL CHECKOUT</div>
+                        <div class="event-location">📍 <a href="https://www.google.com/maps/search/?api=1&query=NH+Amsterdam+Leidseplein+Stadhouderskade+7+Amsterdam" target="_blank" style="color: inherit; text-decoration: underline;">NH Amsterdam Leidseplein</a></div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">14:00</div>
+                    <div class="event-details">
+                        <div class="event-name">DEPARTURE TO AIRPORT</div>
+                        <div class="event-location">📍 Amsterdam Schiphol</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">16:10</div>
+                    <div class="event-details">
+                        <div class="event-name">FLIGHT HOME</div>
+                        <div class="event-location">📍 BA0439 to London City</div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="event-time">∞</div>
+                    <div class="event-details">
+                        <div class="event-name">MEMORIES FOREVER</div>
+                        <div class="event-location">📍 In our hearts (and photos)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Setlist / Activities -->
+<section id="setlist" class="setlist-section">
+    <h2 class="section-title">THE SETLIST</h2>
+    <div class="section-subtitle">GREATEST HITS</div>
+    <div class="setlist">
+        <div class="setlist-item">
+            <span class="track-number">01</span>
+            <span class="track-name">Canal Cruise & Beers</span>
+            <span class="track-duration">🍺🍺🍺</span>
+        </div>
+        <div class="setlist-item">
+            <span class="track-number">02</span>
+            <span class="track-name">Heineken Experience</span>
+            <span class="track-duration">🍺🍺🍺</span>
+        </div>
+        <div class="setlist-item">
+            <span class="track-number">03</span>
+            <span class="track-name">Coffee Shop Tour (Educational)</span>
+            <span class="track-duration">🌿🌿🌿</span>
+        </div>
+        <div class="setlist-item">
+            <span class="track-number">04</span>
+            <span class="track-name">Red Light District</span>
+            <span class="track-duration">🔴🔴🔴</span>
+        </div>
+        <div class="setlist-item">
+            <span class="track-number">05</span>
+            <span class="track-name">Dam Square Mayhem</span>
+            <span class="track-duration">🎉🎉🎉</span>
+        </div>
+        <div class="setlist-item">
+            <span class="track-number">06</span>
+            <span class="track-name">Stag Costume Reveal</span>
+            <span class="track-duration">👑👑👑</span>
+        </div>
+        <div class="setlist-item">
+            <span class="track-number">07</span>
+            <span class="track-name">Epic Night Out</span>
+            <span class="track-duration">🔥🔥🔥</span>
+        </div>
+        <div class="setlist-item encore">
+            <span class="track-number">ENCORE</span>
+            <span class="track-name">3AM Kebabs & Regrets</span>
+            <span class="track-duration">🌯💀</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== VOTE SECTION ===== -->
+<section id="vote" class="voting-section">
+    <h2 class="section-title">THE VOTE</h2>
+    <div class="section-subtitle" id="voteSubtitle">SUGGEST & VOTE ON ACTIVITIES / PLACES</div>
+
+    <!-- Who are you? -->
+    <div class="voter-identity">
+        <label>WHO ARE YOU?</label>
+        <select id="voterSelect">
+            <option value="">— SELECT YOUR NAME —</option>
+            <option value="Raf">RAF</option>
+            <option value="Julien">JULIEN</option>
+            <option value="Stam">STAM</option>
+            <option value="Antoine">ANTOINE</option>
+            <option value="Seymon">SEYMON</option>
+            <option value="Pretesh">PRETESH</option>
+            <option value="Venkat">VENKAT</option>
+            <option value="Evgeni">EVGENI</option>
+            <option value="Dan">DAN</option>
+            <option value="Dave">DAVE</option>
+        </select>
+        <div class="identity-note" id="identityNote">Select your name to suggest & vote</div>
     </div>
 
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
-        <span class="toggle-icon rock-icon">🎸</span>
-        <span class="toggle-icon corp-icon">💼</span>
-    </button>
-
-    <!-- WhatsApp Group Chat Float -->
-    <a href="https://chat.whatsapp.com/FA7SSTCp6rc0Yq2JHGkPKU?mode=gi_t" target="_blank" class="whatsapp-float" id="whatsappFloat" title="Group Chat">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-    </a>
-
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="logo" id="navLogo">RAF TOUR 2026</div>
-            <ul class="nav-links">
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#lineup">THE LINEUP</a></li>
-                <li><a href="#tour-dates">TOUR DATES</a></li>
-                <li><a href="#setlist">SETLIST</a></li>
-                <li><a href="#gallery">BACKSTAGE</a></li>
-                <li><a href="#rules">TOUR RULES</a></li>
-            </ul>
+    <!-- Suggest form -->
+    <div class="suggest-form">
+        <h3 id="suggestFormTitle">🎸 PITCH YOUR IDEA</h3>
+        <div class="suggest-row">
+            <input type="text" class="suggest-title" id="suggestionTitle" placeholder="e.g. Heineken Experience, Go-Karts, Paradiso..." maxlength="80">
+            <select class="suggest-cat" id="suggestionCat">
+                <option value="activity">🎯 Activity</option>
+                <option value="place">🍺 Bar / Place</option>
+                <option value="food">🍔 Food</option>
+                <option value="other">⚡ Other</option>
+            </select>
         </div>
-    </nav>
+        <textarea id="suggestionDesc" placeholder="Any details? (optional)" maxlength="200"></textarea>
+        <div class="locked-notice" id="lockedNotice">⚠ SELECT YOUR NAME ABOVE FIRST</div>
+        <button class="suggest-btn" id="submitSuggestion">+ SUBMIT SUGGESTION</button>
+    </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <img src="raf_viking.png" alt="RAF - The Final Send-Off Tour" class="hero-image">
-            <div class="hero-text">
-                <h1 class="glitch" data-text="THE FINAL SEND-OFF TOUR" id="heroTitle">THE FINAL SEND-OFF TOUR</h1>
-                <h2 id="heroSubtitle">AMSTERDAM • MARCH 6-8, 2026</h2>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="days">00</span>
-                        <span class="countdown-label">DAYS</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="hours">00</span>
-                        <span class="countdown-label">HOURS</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="minutes">00</span>
-                        <span class="countdown-label">MINS</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="seconds">00</span>
-                        <span class="countdown-label">SECS</span>
-                    </div>
-                </div>
-            </div>
+    <!-- Suggestions list -->
+    <div class="suggestions-container">
+        <div class="suggestions-filter">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+            <button class="filter-btn" data-filter="activity">ACTIVITIES</button>
+            <button class="filter-btn" data-filter="place">BARS / PLACES</button>
+            <button class="filter-btn" data-filter="food">FOOD</button>
+            <button class="filter-btn" data-filter="other">OTHER</button>
         </div>
-        <div class="scroll-indicator">SCROLL FOR MORE ▼</div>
-        <div id="confettiContainer"></div>
-    </section>
-
-    <!-- The Lineup Section -->
-    <section id="lineup" class="lineup-section">
-        <h2 class="section-title">THE LINEUP</h2>
-        <div class="section-subtitle">THE WARRIORS RIDING INTO BATTLE</div>
-        
-        <div class="lineup-grid">
-            <div class="lineup-card headliner">
-                <img src="Raf2.PNG" alt="Raf">
-                <div class="lineup-name">RAF</div>
-                <div class="lineup-role">HEADLINER • THE GROOM</div>
-                <div class="lineup-bio">"One last ride before the ball and chain"</div>
-            </div>
-            
-            <div class="lineup-card">
-                <img src="Julien.PNG" alt="Julien">
-                <div class="lineup-name">JULIEN</div>
-                <div class="lineup-role">BEST MAN • TALL FRENCH GUY</div>
-            </div>
-            
-            <div class="lineup-card">
-                <img src="Stam.PNG" alt="Stam">
-                <div class="lineup-name">STAM</div>
-                <div class="lineup-role">THE DUTCH GUY • TALL</div>
-            </div>
-            
-            <div class="lineup-card">
-                <img src="Antoine.PNG" alt="Antoine">
-                <div class="lineup-name">ANTOINE</div>
-                <div class="lineup-role">TALL FRENCH GUY</div>
-            </div>
-
-            <div class="lineup-card">
-                <img src="Seymon.PNG" alt="Seymon">
-                <div class="lineup-name">SEYMON</div>
-                <div class="lineup-role">THE BOSS</div>
-            </div>
-
-            <div class="lineup-card">
-                <img src="Pretesh.PNG" alt="Pretesh">
-                <div class="lineup-name">PRETESH</div>
-                <div class="lineup-role">THE SHORT GUY</div>
-            </div>
-
-            <div class="lineup-card">
-                <img src="Venkat.PNG" alt="Venkat">
-                <div class="lineup-name">VENKAT</div>
-                <div class="lineup-role">THE TECH GUY</div>
-            </div>
-
-            <div class="lineup-card">
-                <img src="Evgeni.PNG" alt="Evgeni">
-                <div class="lineup-name">EVGENI</div>
-                <div class="lineup-role">THE CREW</div>
-            </div>
-
-            <div class="lineup-card">
-                <img src="Daniel.PNG" alt="Daniel">
-                <div class="lineup-name">DAN</div>
-                <div class="lineup-role">THE CREW</div>
-            </div>
-            
-            <div class="lineup-card">
-                <img src="Dave.PNG" alt="Dave">
-                <div class="lineup-name">DAVE</div>
-                <div class="lineup-role">THE CREW</div>
-            </div>
-
+        <div id="suggestionsList">
+            <div class="no-suggestions">NO SUGGESTIONS YET — BE THE FIRST TO PITCH AN IDEA</div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Tour Dates / Itinerary -->
-    <section id="tour-dates" class="tour-dates-section">
-        <h2 class="section-title">TOUR DATES</h2>
-        <div class="section-subtitle">3 NIGHTS OF CHAOS</div>
-        
-        <div class="tour-schedule">
-            <div class="tour-day">
-                <div class="day-header">
-                    <div class="day-number">DAY 1</div>
-                    <div class="day-date">FRIDAY, MARCH 6</div>
-                </div>
-                <div class="day-events">
-                    <div class="event">
-                        <div class="event-time">15:30</div>
-                        <div class="event-details">
-                            <div class="event-name">LEAVE CANARY WHARF</div>
-                            <div class="event-location">📍 DLR to London City Airport</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">17:05</div>
-                        <div class="event-details">
-                            <div class="event-name">WHEELS UP</div>
-                            <div class="event-location">📍 BA8459 departs London City</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">19:15</div>
-                        <div class="event-details">
-                            <div class="event-name">TOUCHDOWN AMSTERDAM</div>
-                            <div class="event-location">📍 Schiphol Airport</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">20:30</div>
-                        <div class="event-details">
-                            <div class="event-name">HOTEL CHECK-IN</div>
-                            <div class="event-location">📍 <a href="https://www.google.com/maps/search/?api=1&query=NH+Amsterdam+Leidseplein+Stadhouderskade+7+Amsterdam" target="_blank" style="color: inherit; text-decoration: underline;">NH Amsterdam Leidseplein</a><br>Stadhouderskade 7, 1054 ES Amsterdam</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">21:30</div>
-                        <div class="event-details">
-                            <div class="event-name">FIRST PINTS & DINNER</div>
-                            <div class="event-location">📍 Leidseplein Area</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">00:00</div>
-                        <div class="event-details">
-                            <div class="event-name">LATE NIGHT EXPLORATION</div>
-                            <div class="event-location">📍 You know where...</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Photo Gallery -->
+<section id="gallery" class="gallery-section">
+    <h2 class="section-title">BACKSTAGE PASS</h2>
+    <div class="section-subtitle">UPLOAD YOUR PHOTOS FROM THE TOUR</div>
+    <div class="upload-zone" id="uploadZone">
+        <div class="upload-icon">📸</div>
+        <div class="upload-text">Click or Drag Photos Here</div>
+        <div class="upload-subtext">Share the chaos with the crew</div>
+    </div>
+    <div class="photo-grid" id="photoGrid"></div>
+</section>
 
-            <div class="tour-day">
-                <div class="day-header">
-                    <div class="day-number">DAY 2</div>
-                    <div class="day-date">SATURDAY, MARCH 7</div>
-                </div>
-                <div class="day-events">
-                    <div class="event">
-                        <div class="event-time">10:00</div>
-                        <div class="event-details">
-                            <div class="event-name">RECOVERY BREAKFAST</div>
-                            <div class="event-location">📍 Hotel</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">13:00</div>
-                        <div class="event-details">
-                            <div class="event-name">ACTIVITY TBC</div>
-                            <div class="event-location">📍 Shooting Range / Go-Karts / Beer Bikes?</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">18:00</div>
-                        <div class="event-details">
-                            <div class="event-name">PUB CRAWL BEGINS</div>
-                            <div class="event-location">📍 Leidseplein Area</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">23:00</div>
-                        <div class="event-details">
-                            <div class="event-name">CLUB NIGHT</div>
-                            <div class="event-location">📍 Paradiso / Melkweg TBC</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tour-day">
-                <div class="day-header">
-                    <div class="day-number">DAY 3</div>
-                    <div class="day-date">SUNDAY, MARCH 8</div>
-                </div>
-                <div class="day-events">
-                    <div class="event">
-                        <div class="event-time">10:00</div>
-                        <div class="event-details">
-                            <div class="event-name">RECOVERY BRUNCH</div>
-                            <div class="event-location">📍 Hotel / Local Spot</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">12:00</div>
-                        <div class="event-details">
-                            <div class="event-name">HOTEL CHECKOUT</div>
-                            <div class="event-location">📍 <a href="https://www.google.com/maps/search/?api=1&query=NH+Amsterdam+Leidseplein+Stadhouderskade+7+Amsterdam" target="_blank" style="color: inherit; text-decoration: underline;">NH Amsterdam Leidseplein</a></div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">14:00</div>
-                        <div class="event-details">
-                            <div class="event-name">DEPARTURE TO AIRPORT</div>
-                            <div class="event-location">📍 Amsterdam Schiphol</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">16:10</div>
-                        <div class="event-details">
-                            <div class="event-name">FLIGHT HOME</div>
-                            <div class="event-location">📍 BA0439 to London City</div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-time">∞</div>
-                        <div class="event-details">
-                            <div class="event-name">MEMORIES FOREVER</div>
-                            <div class="event-location">📍 In our hearts (and photos)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Tour Rules -->
+<section id="rules" class="rules-section">
+    <h2 class="section-title">TOUR RULES</h2>
+    <div class="section-subtitle">BREAK THEM AT YOUR PERIL</div>
+    <div class="rules-container">
+        <div class="rule-card">
+            <div class="rule-number">01</div>
+            <div class="rule-text">What happens in Amsterdam, gets posted in the group chat</div>
         </div>
-    </section>
-
-    <!-- Setlist / Activities -->
-    <section id="setlist" class="setlist-section">
-        <h2 class="section-title">THE SETLIST</h2>
-        <div class="section-subtitle">GREATEST HITS</div>
-        
-        <div class="setlist">
-            <div class="setlist-item">
-                <span class="track-number">01</span>
-                <span class="track-name">Canal Cruise & Beers</span>
-                <span class="track-duration">🍺🍺🍺</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">02</span>
-                <span class="track-name">Heineken Experience</span>
-                <span class="track-duration">🍺🍺🍺</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">03</span>
-                <span class="track-name">Coffee Shop Tour (Educational)</span>
-                <span class="track-duration">🌿🌿🌿</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">04</span>
-                <span class="track-name">Red Light District</span>
-                <span class="track-duration">🔴🔴🔴</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">05</span>
-                <span class="track-name">Dam Square Mayhem</span>
-                <span class="track-duration">🎉🎉🎉</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">06</span>
-                <span class="track-name">Stag Costume Reveal</span>
-                <span class="track-duration">👑👑👑</span>
-            </div>
-            <div class="setlist-item">
-                <span class="track-number">07</span>
-                <span class="track-name">Epic Night Out</span>
-                <span class="track-duration">🔥🔥🔥</span>
-            </div>
-            <div class="setlist-item encore">
-                <span class="track-number">ENCORE</span>
-                <span class="track-name">3AM Kebabs & Regrets</span>
-                <span class="track-duration">🌯💀</span>
-            </div>
+        <div class="rule-card">
+            <div class="rule-number">02</div>
+            <div class="rule-text">The groom drinks for free (or pays double, we'll decide)</div>
         </div>
-    </section>
-
-    <!-- Photo Gallery -->
-    <section id="gallery" class="gallery-section">
-        <h2 class="section-title">BACKSTAGE PASS</h2>
-        <div class="section-subtitle">UPLOAD YOUR PHOTOS FROM THE TOUR</div>
-        
-        <div class="upload-zone" id="uploadZone">
-            <div class="upload-icon">📸</div>
-            <div class="upload-text">Click or Drag Photos Here</div>
-            <div class="upload-subtext">Share the chaos with the crew</div>
+        <div class="rule-card">
+            <div class="rule-number">03</div>
+            <div class="rule-text">No man left behind (unless he's being arrested)</div>
         </div>
-
-        <div class="photo-grid" id="photoGrid"></div>
-    </section>
-
-    <!-- Tour Rules -->
-    <section id="rules" class="rules-section">
-        <h2 class="section-title">TOUR RULES</h2>
-        <div class="section-subtitle">BREAK THEM AT YOUR PERIL</div>
-        
-        <div class="rules-container">
-            <div class="rule-card">
-                <div class="rule-number">01</div>
-                <div class="rule-text">What happens in Amsterdam, gets posted in the group chat</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">02</div>
-                <div class="rule-text">The groom drinks for free (or pays double, we'll decide)</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">03</div>
-                <div class="rule-text">No man left behind (unless he's being arrested)</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">04</div>
-                <div class="rule-text">Costume must be worn at all times on Day 2</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">05</div>
-                <div class="rule-text">Forfeit drinks for: mentioning the wedding, checking work emails, boring conversation</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">06</div>
-                <div class="rule-text">Photos or it didn't happen</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">07</div>
-                <div class="rule-text">Emergency contact: Don't call anyone, we're adults</div>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">08</div>
-                <div class="rule-text">What Raf says, goes. Except when he's too drunk to talk.</div>
-            </div>
+        <div class="rule-card">
+            <div class="rule-number">04</div>
+            <div class="rule-text">Costume must be worn at all times on Day 2</div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo" id="footerLogo">RAF • THE FINAL SEND-OFF TOUR</div>
-            <div class="footer-text" id="footerText">AMSTERDAM • MARCH 6-8, 2026</div>
-            <div class="footer-warning" id="footerWarning">⚠️ PARENTAL ADVISORY: EXPLICIT CONTENT ⚠️</div>
-            <div class="footer-links">
-                <a href="#home">HOME</a>
-                <a href="#lineup">LINEUP</a>
-                <a href="#tour-dates">DATES</a>
-                <a href="#gallery">PHOTOS</a>
-            </div>
+        <div class="rule-card">
+            <div class="rule-number">05</div>
+            <div class="rule-text">Forfeit drinks for: mentioning the wedding, checking work emails, boring conversation</div>
         </div>
-    </footer>
+        <div class="rule-card">
+            <div class="rule-number">06</div>
+            <div class="rule-text">Photos or it didn't happen</div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">07</div>
+            <div class="rule-text">Emergency contact: Don't call anyone, we're adults</div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">08</div>
+            <div class="rule-text">What Raf says, goes. Except when he's too drunk to talk.</div>
+        </div>
+    </div>
+</section>
 
-    <!-- Core site functionality -->
-    <script src="script.js"></script>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo" id="footerLogo">RAF • THE FINAL SEND-OFF TOUR</div>
+        <div class="footer-text" id="footerText">AMSTERDAM • MARCH 6-8, 2026</div>
+        <div class="footer-warning" id="footerWarning">⚠️ PARENTAL ADVISORY: EXPLICIT CONTENT ⚠️</div>
+        <div class="footer-links">
+            <a href="#home">HOME</a>
+            <a href="#lineup">LINEUP</a>
+            <a href="#tour-dates">DATES</a>
+            <a href="#vote">VOTE</a>
+            <a href="#gallery">PHOTOS</a>
+        </div>
+    </div>
+</footer>
 
-    <!-- Firebase SDK (modular, from CDN) -->
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js';
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp }
-            from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js';
+<!-- Core site functionality -->
+<script src="script.js"></script>
 
-        const app = initializeApp({
-            apiKey: "AIzaSyBLh95u3yOVEAAehXQhTh3d-O73RZ5m41w",
-            authDomain: "rafstag-33347.firebaseapp.com",
-            projectId: "rafstag-33347",
-            storageBucket: "rafstag-33347.firebasestorage.app",
-            messagingSenderId: "750551283012",
-            appId: "1:750551283012:web:d35c36693043ae4c92d311"
-        });
+<!-- Firebase SDK -->
+<script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js';
+    import {
+        getFirestore, collection, addDoc, query, orderBy,
+        onSnapshot, serverTimestamp, doc, updateDoc, arrayUnion, arrayRemove
+    } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js';
 
-        const db = getFirestore(app);
-        const photosRef = collection(db, 'photos');
+    const app = initializeApp({
+        apiKey: "AIzaSyBLh95u3yOVEAAehXQhTh3d-O73RZ5m41w",
+        authDomain: "rafstag-33347.firebaseapp.com",
+        projectId: "rafstag-33347",
+        storageBucket: "rafstag-33347.firebasestorage.app",
+        messagingSenderId: "750551283012",
+        appId: "1:750551283012:web:d35c36693043ae4c92d311"
+    });
 
-        const CLOUD_NAME    = 'dqugijser';
-        const UPLOAD_PRESET = 'rafstag_photos';
+    const db = getFirestore(app);
 
-        const uploadZone = document.getElementById('uploadZone');
-        const photoGrid  = document.getElementById('photoGrid');
+    // ===== PHOTO UPLOAD =====
+    const photosRef   = collection(db, 'photos');
+    const CLOUD_NAME  = 'dqugijser';
+    const UPLOAD_PRESET = 'rafstag_photos';
 
-        const fileInput    = document.createElement('input');
-        fileInput.type     = 'file';
-        fileInput.accept   = 'image/*';
-        fileInput.multiple = true;
-        fileInput.style.display = 'none';
-        document.body.appendChild(fileInput);
+    const uploadZone = document.getElementById('uploadZone');
+    const photoGrid  = document.getElementById('photoGrid');
+    const fileInput  = Object.assign(document.createElement('input'), {
+        type: 'file', accept: 'image/*', multiple: true
+    });
+    fileInput.style.display = 'none';
+    document.body.appendChild(fileInput);
 
-        const rendered = new Set();
+    const rendered = new Set();
 
-        uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.style.background = 'rgba(255,0,0,0.2)'; });
+    uploadZone.addEventListener('dragleave', e => { e.preventDefault(); uploadZone.style.background = ''; });
+    uploadZone.addEventListener('drop', e => {
+        e.preventDefault(); uploadZone.style.background = '';
+        const imgs = [...e.dataTransfer.files].filter(f => f.type.startsWith('image/'));
+        if (imgs.length) runUpload(imgs);
+    });
+    fileInput.addEventListener('change', e => { if (e.target.files.length) runUpload([...e.target.files]); fileInput.value = ''; });
 
-        uploadZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadZone.style.background = 'rgba(255, 0, 0, 0.2)';
-        });
-        uploadZone.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            uploadZone.style.background = '';
-        });
-        uploadZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadZone.style.background = '';
-            const imgs = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
-            if (imgs.length) runUpload(imgs);
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            const imgs = Array.from(e.target.files);
-            if (imgs.length) runUpload(imgs);
-            fileInput.value = '';
-        });
-
-        async function runUpload(files) {
-            const saved = uploadZone.innerHTML;
-            let done = 0;
-
-            uploadZone.innerHTML = `
-                <div class="upload-icon">⏳</div>
-                <div class="upload-text" id="uploadProgress">Uploading 0 / ${files.length}…</div>
-            `;
-            const prog = document.getElementById('uploadProgress');
-
-            for (const f of files) {
-                const url = await uploadToCloudinary(f);
-                if (url) {
-                    done++;
-                    await saveToFirebase(url);
-                }
-                prog.textContent = `Uploading ${done} / ${files.length}…`;
-            }
-
-            uploadZone.innerHTML = saved;
-            if (done) showNotification(`${done} photo${done > 1 ? 's' : ''} uploaded! 📸`);
+    async function runUpload(files) {
+        const saved = uploadZone.innerHTML;
+        let done = 0;
+        uploadZone.innerHTML = `<div class="upload-icon">⏳</div><div class="upload-text" id="uploadProgress">Uploading 0 / ${files.length}…</div>`;
+        const prog = document.getElementById('uploadProgress');
+        for (const f of files) {
+            const url = await uploadToCloudinary(f);
+            if (url) { done++; await addDoc(photosRef, { url, uploadedAt: serverTimestamp() }); }
+            prog.textContent = `Uploading ${done} / ${files.length}…`;
         }
+        uploadZone.innerHTML = saved;
+        if (done) notify(`${done} photo${done > 1 ? 's' : ''} uploaded! 📸`);
+    }
 
-        async function uploadToCloudinary(file) {
-            const fd = new FormData();
-            fd.append('file', file);
-            fd.append('upload_preset', UPLOAD_PRESET);
-            fd.append('tags', 'rafstag');
+    async function uploadToCloudinary(file) {
+        const fd = new FormData();
+        fd.append('file', file); fd.append('upload_preset', UPLOAD_PRESET); fd.append('tags', 'rafstag');
+        try {
+            const r = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, { method: 'POST', body: fd });
+            const d = await r.json();
+            if (d.error) { alert('Upload failed: ' + d.error.message); return null; }
+            return d.secure_url;
+        } catch { alert('Upload failed — check your connection.'); return null; }
+    }
 
-            try {
-                const r = await fetch(
-                    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-                    { method: 'POST', body: fd }
-                );
-                const d = await r.json();
-                if (d.error) {
-                    alert('Upload failed: ' + d.error.message);
-                    return null;
-                }
-                return d.secure_url;
-            } catch (e) {
-                alert('Upload failed — check your connection.');
-                return null;
-            }
-        }
-
-        async function saveToFirebase(url) {
-            try {
-                await addDoc(photosRef, {
-                    url: url,
-                    uploadedAt: serverTimestamp()
-                });
-            } catch (e) {
-                console.error('Firebase save error:', e);
-            }
-        }
-
-        const q = query(photosRef, orderBy('uploadedAt', 'desc'));
-
-        onSnapshot(q, (snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-                if (change.type === 'added') {
-                    const data = change.doc.data();
-                    if (data.url) {
-                        addPhotoToGrid(data.url);
-                    }
-                }
-            });
-
-            if (snapshot.empty && rendered.size === 0) {
-                showEmpty();
-            }
-        }, (error) => {
-            console.error('Firebase listener error:', error);
-            showEmpty();
+    onSnapshot(query(photosRef, orderBy('uploadedAt', 'desc')), snap => {
+        snap.docChanges().forEach(ch => {
+            if (ch.type === 'added' && ch.doc.data().url) addPhoto(ch.doc.data().url);
         });
-
-        function addPhotoToGrid(url) {
-            if (rendered.has(url)) return;
-            rendered.add(url);
-
-            const msg = photoGrid.querySelector('.gallery-msg');
-            if (msg) msg.remove();
-
-            const div = document.createElement('div');
-            div.className = 'photo-item';
-            div.innerHTML = `<img src="${url}" alt="Stag photo" loading="lazy">`;
-            photoGrid.insertBefore(div, photoGrid.firstChild);
-        }
-
-        function showEmpty() {
-            if (rendered.size > 0) return;
-            if (photoGrid.querySelector('.gallery-msg')) return;
+        if (snap.empty && rendered.size === 0) {
             const p = document.createElement('p');
             p.className = 'gallery-msg';
             p.style.cssText = 'color:#888;text-align:center;width:100%;padding:40px 20px;';
             p.textContent = 'No photos yet. Be the first to upload!';
             photoGrid.appendChild(p);
         }
-    </script>
+    });
+
+    function addPhoto(url) {
+        if (rendered.has(url)) return;
+        rendered.add(url);
+        photoGrid.querySelector('.gallery-msg')?.remove();
+        const div = document.createElement('div');
+        div.className = 'photo-item';
+        div.innerHTML = `<img src="${url}" alt="Stag photo" loading="lazy">`;
+        photoGrid.insertBefore(div, photoGrid.firstChild);
+    }
+
+    // ===== VOTING =====
+    const suggestionsRef = collection(db, 'suggestions');
+
+    let currentUser  = null;
+    let currentFilter = 'all';
+    let allDocs = {}; // id -> data
+
+    const voterSelect     = document.getElementById('voterSelect');
+    const submitBtn       = document.getElementById('submitSuggestion');
+    const titleInput      = document.getElementById('suggestionTitle');
+    const catSelect       = document.getElementById('suggestionCat');
+    const descInput       = document.getElementById('suggestionDesc');
+    const suggestionsList = document.getElementById('suggestionsList');
+    const lockedNotice    = document.getElementById('lockedNotice');
+    const identityNote    = document.getElementById('identityNote');
+    const suggestFormTitle = document.getElementById('suggestFormTitle');
+    const voteSubtitle    = document.getElementById('voteSubtitle');
+
+    // Initial locked state
+    lockedNotice.style.display = 'block';
+    submitBtn.style.display = 'none';
+
+    // Theme-aware copy
+    function updateVoteCopy() {
+        const corp = document.documentElement.getAttribute('data-theme') === 'corporate';
+        suggestFormTitle.textContent = corp ? '📋 SUBMIT A PROPOSAL' : '🎸 PITCH YOUR IDEA';
+        voteSubtitle.textContent = corp
+            ? 'SUBMIT & VOTE ON TEAM OFFSITE AGENDA ITEMS'
+            : 'SUGGEST & VOTE ON ACTIVITIES / PLACES';
+    }
+    new MutationObserver(updateVoteCopy).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    updateVoteCopy();
+
+    // Name selection
+    voterSelect.addEventListener('change', () => {
+        currentUser = voterSelect.value || null;
+        if (currentUser) {
+            identityNote.textContent = `Voting as ${currentUser.toUpperCase()} — one vote per suggestion`;
+            lockedNotice.style.display = 'none';
+            submitBtn.style.display = 'inline-block';
+        } else {
+            identityNote.textContent = 'Select your name to suggest & vote';
+            lockedNotice.style.display = 'block';
+            submitBtn.style.display = 'none';
+        }
+        render();
+    });
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+            render();
+        });
+    });
+
+    // Submit
+    submitBtn.addEventListener('click', async () => {
+        if (!currentUser) return;
+        const title = titleInput.value.trim();
+        if (!title) { titleInput.focus(); return; }
+
+        submitBtn.textContent = 'SUBMITTING…';
+        submitBtn.disabled = true;
+
+        try {
+            await addDoc(suggestionsRef, {
+                title,
+                category: catSelect.value,
+                description: descInput.value.trim(),
+                suggestedBy: currentUser,
+                voters: [currentUser], // auto-upvote own idea
+                createdAt: serverTimestamp()
+            });
+            titleInput.value = '';
+            descInput.value = '';
+            notify('Suggestion added! 🤘');
+        } catch (e) {
+            console.error(e);
+            alert('Failed to submit. Try again.');
+        }
+
+        submitBtn.textContent = '+ SUBMIT SUGGESTION';
+        submitBtn.disabled = false;
+    });
+
+    // Real-time sync
+    onSnapshot(query(suggestionsRef, orderBy('createdAt', 'desc')), snap => {
+        allDocs = {};
+        snap.forEach(d => { allDocs[d.id] = { id: d.id, ...d.data() }; });
+        render();
+    });
+
+    function render() {
+        suggestionsList.innerHTML = '';
+        let items = Object.values(allDocs);
+        if (currentFilter !== 'all') items = items.filter(s => s.category === currentFilter);
+        items.sort((a, b) => (b.voters?.length || 0) - (a.voters?.length || 0));
+
+        if (!items.length) {
+            const el = document.createElement('div');
+            el.className = 'no-suggestions';
+            el.textContent = currentFilter === 'all'
+                ? 'NO SUGGESTIONS YET — BE THE FIRST TO PITCH AN IDEA'
+                : 'NO SUGGESTIONS IN THIS CATEGORY YET';
+            suggestionsList.appendChild(el);
+            return;
+        }
+
+        items.forEach(s => suggestionsList.appendChild(buildCard(s)));
+    }
+
+    const CAT_LABELS = { activity: '🎯 Activity', place: '🍺 Bar / Place', food: '🍔 Food', other: '⚡ Other' };
+
+    function buildCard(s) {
+        const voters   = s.voters || [];
+        const iVoted   = currentUser && voters.includes(currentUser);
+        const card     = document.createElement('div');
+        card.className = `suggestion-card cat-${s.category} ${iVoted ? 'voted-by-me' : ''}`;
+
+        card.innerHTML = `
+            <button class="vote-btn ${iVoted ? 'voted' : ''}">
+                <span class="vote-arrow">▲</span>
+                <span class="vote-count">${voters.length}</span>
+            </button>
+            <div class="suggestion-content">
+                <div class="suggestion-header">
+                    <span class="suggestion-title">${esc(s.title)}</span>
+                    <span class="suggestion-category">${CAT_LABELS[s.category] || s.category}</span>
+                </div>
+                ${s.description ? `<div class="suggestion-desc">${esc(s.description)}</div>` : ''}
+                <div class="suggestion-meta">Suggested by ${s.suggestedBy || '?'}</div>
+                ${voters.length ? `<div class="voters-list">👍 ${voters.join(', ')}</div>` : ''}
+            </div>`;
+
+        card.querySelector('.vote-btn').addEventListener('click', () => toggleVote(s.id, iVoted));
+        return card;
+    }
+
+    async function toggleVote(id, iVoted) {
+        if (!currentUser) { notify('Select your name first!'); voterSelect.focus(); return; }
+        const ref = doc(db, 'suggestions', id);
+        await updateDoc(ref, { voters: iVoted ? arrayRemove(currentUser) : arrayUnion(currentUser) });
+    }
+
+    function esc(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function notify(msg) {
+        if (typeof window.showNotification === 'function') { window.showNotification(msg); return; }
+        const n = document.createElement('div');
+        n.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#ff0000;color:#fff;padding:14px 28px;border-radius:4px;font-family:Courier New,monospace;font-size:0.85rem;letter-spacing:2px;z-index:9999;pointer-events:none;';
+        n.textContent = msg;
+        document.body.appendChild(n);
+        setTimeout(() => n.remove(), 3000);
+    }
+</script>
+```
+
 </body>
 </html>
