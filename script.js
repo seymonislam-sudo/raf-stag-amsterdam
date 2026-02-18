@@ -453,3 +453,67 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 });
+
+// ===== LIGHTBOX =====
+(function() {
+    const overlay   = document.getElementById('lightboxOverlay');
+    const img       = document.getElementById('lightboxImg');
+    const closeBtn  = document.getElementById('lightboxClose');
+    const prevBtn   = document.getElementById('lightboxPrev');
+    const nextBtn   = document.getElementById('lightboxNext');
+    const counter   = document.getElementById('lightboxCounter');
+    const photoGrid = document.getElementById('photoGrid');
+
+    let photos = [];
+    let current = 0;
+
+    function getPhotos() {
+        return [...document.querySelectorAll('.photo-item img')].map(i => i.src);
+    }
+
+    function open(index) {
+        photos = getPhotos();
+        if (!photos.length) return;
+        current = index;
+        show();
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function show() {
+        img.src = photos[current];
+        counter.textContent = `${current + 1} / ${photos.length}`;
+        prevBtn.style.visibility = photos.length > 1 ? 'visible' : 'hidden';
+        nextBtn.style.visibility = photos.length > 1 ? 'visible' : 'hidden';
+    }
+
+    function prev() { current = (current - 1 + photos.length) % photos.length; show(); }
+    function next() { current = (current + 1) % photos.length; show(); }
+
+    // Click on photo grid (delegated, works for dynamically added photos)
+    photoGrid.addEventListener('click', e => {
+        const item = e.target.closest('.photo-item');
+        if (!item) return;
+        const imgs = [...document.querySelectorAll('.photo-item img')];
+        const index = imgs.indexOf(item.querySelector('img'));
+        open(index);
+    });
+
+    closeBtn.addEventListener('click', close);
+    prevBtn.addEventListener('click', e => { e.stopPropagation(); prev(); });
+    nextBtn.addEventListener('click', e => { e.stopPropagation(); next(); });
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+
+    // Keyboard nav
+    document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('active')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+    });
+})();
