@@ -774,6 +774,7 @@
     <h2 class="section-title">THE VOTE</h2>
     <div class="section-subtitle" id="voteSubtitle">SUGGEST & VOTE ON ACTIVITIES / PLACES</div>
 
+    <!-- Who are you? -->
     <div class="voter-identity">
         <label>WHO ARE YOU?</label>
         <select id="voterSelect">
@@ -792,6 +793,7 @@
         <div class="identity-note" id="identityNote">Select your name to suggest & vote</div>
     </div>
 
+    <!-- Suggest form -->
     <div class="suggest-form">
         <h3 id="suggestFormTitle">🎸 PITCH YOUR IDEA</h3>
         <div class="suggest-row">
@@ -808,6 +810,7 @@
         <button class="suggest-btn" id="submitSuggestion">+ SUBMIT SUGGESTION</button>
     </div>
 
+    <!-- Suggestions list -->
     <div class="suggestions-container">
         <div class="suggestions-filter">
             <button class="filter-btn active" data-filter="all">ALL</button>
@@ -889,17 +892,6 @@
         </div>
     </div>
 </footer>
-
-<!-- LIGHTBOX — ADDED -->
-<div class="lightbox-overlay" id="lightboxOverlay">
-    <div class="lightbox-inner">
-        <button class="lightbox-close" id="lightboxClose">✕ CLOSE</button>
-        <img src="" alt="Photo" id="lightboxImg">
-        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#8249;</button>
-        <button class="lightbox-nav lightbox-next" id="lightboxNext">&#8250;</button>
-        <div class="lightbox-counter" id="lightboxCounter"></div>
-    </div>
-</div>
 
 <!-- Core site functionality -->
 <script src="script.js"></script>
@@ -1001,7 +993,7 @@
 
     let currentUser  = null;
     let currentFilter = 'all';
-    let allDocs = {};
+    let allDocs = {}; // id -> data
 
     const voterSelect     = document.getElementById('voterSelect');
     const submitBtn       = document.getElementById('submitSuggestion');
@@ -1014,9 +1006,11 @@
     const suggestFormTitle = document.getElementById('suggestFormTitle');
     const voteSubtitle    = document.getElementById('voteSubtitle');
 
+    // Initial locked state
     lockedNotice.style.display = 'block';
     submitBtn.style.display = 'none';
 
+    // Theme-aware copy
     function updateVoteCopy() {
         const corp = document.documentElement.getAttribute('data-theme') === 'corporate';
         suggestFormTitle.textContent = corp ? '📋 SUBMIT A PROPOSAL' : '🎸 PITCH YOUR IDEA';
@@ -1027,6 +1021,7 @@
     new MutationObserver(updateVoteCopy).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     updateVoteCopy();
 
+    // Name selection
     voterSelect.addEventListener('change', () => {
         currentUser = voterSelect.value || null;
         if (currentUser) {
@@ -1041,6 +1036,7 @@
         render();
     });
 
+    // Filter buttons
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1050,6 +1046,7 @@
         });
     });
 
+    // Submit
     submitBtn.addEventListener('click', async () => {
         if (!currentUser) return;
         const title = titleInput.value.trim();
@@ -1064,7 +1061,7 @@
                 category: catSelect.value,
                 description: descInput.value.trim(),
                 suggestedBy: currentUser,
-                voters: [currentUser],
+                voters: [currentUser], // auto-upvote own idea
                 createdAt: serverTimestamp()
             });
             titleInput.value = '';
@@ -1079,6 +1076,7 @@
         submitBtn.disabled = false;
     });
 
+    // Real-time sync
     onSnapshot(suggestionsRef, snap => {
         allDocs = {};
         snap.forEach(d => { allDocs[d.id] = { id: d.id, ...d.data() }; });
