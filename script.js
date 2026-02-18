@@ -23,6 +23,7 @@ sectionSubtitles: {
 ‘UPLOAD YOUR PHOTOS FROM THE TOUR’: ‘UPLOAD SUPPORTING MATERIALS’,
 ‘BREAK THEM AT YOUR PERIL’: ‘MANDATORY — PER COMPLIANCE POLICY §7.3’
 },
+// Lineup roles
 roles: {
 ‘HEADLINER • THE GROOM’: ‘PROJECT LEAD’,
 ‘BEST MAN • TALL FRENCH GUY’: ‘DEPUTY PROJECT LEAD (EMEA)’,
@@ -33,14 +34,17 @@ roles: {
 ‘THE TECH GUY’: ‘TECHNOLOGY SME’,
 ‘THE CREW’: ‘TEAM MEMBER’
 },
+// Bio
 bios: {
 ‘“One last ride before the ball and chain”’: ‘“Committed to delivering stakeholder value”’
 },
+// Day headers
 dayDates: {
 ‘FRIDAY, MARCH 6’: ‘FRIDAY, 6 MARCH — TRAVEL & ONBOARDING’,
 ‘SATURDAY, MARCH 7’: ‘SATURDAY, 7 MARCH — CORE SESSIONS’,
 ‘SUNDAY, MARCH 8’: ‘SUNDAY, 8 MARCH — WRAP-UP & DEPARTURE’
 },
+// Event names
 events: {
 ‘LEAVE CANARY WHARF’: ‘DEPART CANARY WHARF OFFICE’,
 ‘WHEELS UP’: ‘SCHEDULED DEPARTURE’,
@@ -58,6 +62,7 @@ events: {
 ‘FLIGHT HOME’: ‘SCHEDULED RETURN FLIGHT’,
 ‘MEMORIES FOREVER’: ‘ACTION ITEMS & FOLLOW-UPS’
 },
+// Event locations
 locations: {
 ‘📍 DLR to London City Airport’: ‘📍 Pre-approved transport route’,
 ‘📍 BA8459 departs London City’: ‘📍 BA8459 — Corporate Travel booked’,
@@ -72,6 +77,7 @@ locations: {
 ‘📍 BA0439 to London City’: ‘📍 BA0439 — Corporate Travel booked’,
 ‘📍 In our hearts (and photos)’: ‘📍 Deliverables due within 5 business days’
 },
+// Setlist tracks
 tracks: {
 ‘Canal Cruise & Beers’: ‘Stakeholder Alignment Exercise (Canal)’,
 ‘Heineken Experience’: ‘Cultural Immersion Workshop (Brewery)’,
@@ -82,6 +88,7 @@ tracks: {
 ‘Epic Night Out’: ‘Extended Networking Session’,
 ‘3AM Kebabs & Regrets’: ‘Post-Session Sustenance & Retrospective’
 },
+// Rules
 rules: [
 ‘All discussions during the offsite are subject to information barriers and need-to-know protocols.’,
 ‘Ensure the Project Lead is adequately hydrated and supported at all times.’,
@@ -94,6 +101,7 @@ rules: [
 ]
 };
 
+// Reverse mappings (corporate → rock)
 function reverseMap(map) {
 const r = {};
 for (const [k, v] of Object.entries(map)) r[v] = k;
@@ -126,6 +134,7 @@ rules: [
 ]
 };
 
+// Generic text swapper
 function swapText(map, selector) {
 document.querySelectorAll(selector).forEach(el => {
 const text = el.textContent.trim();
@@ -133,6 +142,7 @@ if (map[text]) el.textContent = map[text];
 });
 }
 
+// innerHTML swapper (for locations with <br> tags)
 function swapHTML(map, selector) {
 document.querySelectorAll(selector).forEach(el => {
 const text = el.textContent.trim();
@@ -140,6 +150,7 @@ if (map[text]) el.textContent = map[text];
 });
 }
 
+// Flash effect
 function createFlash() {
 let flash = document.querySelector(’.theme-flash’);
 if (!flash) {
@@ -154,36 +165,50 @@ setTimeout(() => flash.classList.remove(‘active’), 500);
 }
 
 function applyThemeText(source) {
+// Hero
 const heroTitle = document.getElementById(‘heroTitle’);
 if (heroTitle) {
 heroTitle.textContent = source.heroTitle;
 heroTitle.setAttribute(‘data-text’, source.heroTitle);
 }
-const navLogo = document.getElementById(‘navLogo’);
-if (navLogo) navLogo.textContent = source.navLogo;
-const footerLogo = document.getElementById(‘footerLogo’);
-if (footerLogo) footerLogo.textContent = source.footerLogo;
-const footerText = document.getElementById(‘footerText’);
-if (footerText) footerText.textContent = source.footerText;
-const footerWarning = document.getElementById(‘footerWarning’);
-if (footerWarning) footerWarning.textContent = source.footerWarning;
 
 ```
+const navLogo = document.getElementById('navLogo');
+if (navLogo) navLogo.textContent = source.navLogo;
+
+const footerLogo = document.getElementById('footerLogo');
+if (footerLogo) footerLogo.textContent = source.footerLogo;
+
+const footerText = document.getElementById('footerText');
+if (footerText) footerText.textContent = source.footerText;
+
+const footerWarning = document.getElementById('footerWarning');
+if (footerWarning) footerWarning.textContent = source.footerWarning;
+
+// Section titles & subtitles
 swapText(source.sectionTitles, '.section-title');
 swapText(source.sectionSubtitles, '.section-subtitle');
+
+// Lineup
 swapText(source.roles, '.lineup-role');
 swapText(source.bios, '.lineup-bio');
+
+// Tour dates
 swapText(source.dayDates, '.day-date');
 swapText(source.events, '.event-name');
 swapHTML(source.locations, '.event-location');
+
+// Setlist
 swapText(source.tracks, '.track-name');
 
+// Rules (by index)
 if (source.rules) {
     document.querySelectorAll('.rule-text').forEach((el, i) => {
         if (source.rules[i]) el.textContent = source.rules[i];
     });
 }
 
+// Upload text
 const uploadText = document.querySelector('.upload-text');
 const uploadSub = document.querySelector('.upload-subtext');
 if (source === corporateText) {
@@ -194,21 +219,27 @@ if (source === corporateText) {
     if (uploadSub) uploadSub.textContent = 'Share the chaos with the crew';
 }
 
+// Swap lineup images (rock ↔ corporate)
 document.querySelectorAll('.lineup-card img').forEach(img => {
     const src = img.getAttribute('src');
     if (!src) return;
     if (source === corporateText) {
-        if (!src.includes('_corp')) img.setAttribute('src', src.replace(/(\.\w+)$/, '_corp$1'));
+        if (!src.includes('_corp')) {
+            img.setAttribute('src', src.replace(/(\.\w+)$/, '_corp$1'));
+        }
     } else {
         img.setAttribute('src', src.replace('_corp', ''));
     }
 });
 
+// Swap hero image (raf_viking.png ↔ raf_viking_corp.png)
 const heroImg = document.querySelector('.hero-image');
 if (heroImg) {
     const src = heroImg.getAttribute('src');
     if (source === corporateText) {
-        if (!src.includes('_corp')) heroImg.setAttribute('src', src.replace(/(\.\w+)$/, '_corp$1'));
+        if (!src.includes('_corp')) {
+            heroImg.setAttribute('src', src.replace(/(\.\w+)$/, '_corp$1'));
+        }
     } else {
         heroImg.setAttribute('src', src.replace('_corp', ''));
     }
@@ -221,14 +252,25 @@ function toggleTheme() {
 const html = document.documentElement;
 const current = html.getAttribute(‘data-theme’);
 const next = current === ‘rock’ ? ‘corporate’ : ‘rock’;
+
+```
+// Flash
 createFlash();
-html.setAttribute(‘data-theme’, next);
-applyThemeText(next === ‘corporate’ ? corporateText : rockText);
-localStorage.setItem(‘rafstag-theme’, next);
+
+// Switch theme
+html.setAttribute('data-theme', next);
+
+// Swap text
+applyThemeText(next === 'corporate' ? corporateText : rockText);
+
+// Persist
+localStorage.setItem('rafstag-theme', next);
+```
+
 }
 
 // =============================================
-// COUNTDOWN
+// COUNTDOWN — ENHANCED WITH URGENCY STATES
 // =============================================
 
 let confettiFired = false;
@@ -253,7 +295,10 @@ if (distance <= 0) {
     minutesEl.textContent = '00';
     secondsEl.textContent = '00';
     if (countdown) countdown.className = 'countdown zero';
-    if (!confettiFired) { confettiFired = true; launchConfetti(); }
+    if (!confettiFired) {
+        confettiFired = true;
+        launchConfetti();
+    }
     return;
 }
 
@@ -267,6 +312,7 @@ animateValue(hoursEl, hours);
 animateValue(minutesEl, minutes);
 animateValue(secondsEl, seconds);
 
+// Urgency states
 if (countdown) {
     countdown.classList.remove('urgent', 'critical', 'zero');
     if (days <= 3 && days > 0) countdown.classList.add('urgent');
@@ -311,7 +357,7 @@ setTimeout(() => piece.remove(), 5000);
 }
 
 // =============================================
-// NOTIFICATION SYSTEM
+// NOTIFICATION SYSTEM (from original)
 // =============================================
 
 function showNotification(message) {
@@ -319,29 +365,38 @@ const notification = document.createElement(‘div’);
 notification.style.cssText = `position: fixed; top: 100px; right: 20px; background: var(--accent, #FF0000); color: #fff; padding: 20px 30px; border-radius: 10px; font-size: 18px; font-family: Arial, sans-serif; z-index: 10000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: slideIn 0.3s ease-out;`;
 notification.textContent = message;
 document.body.appendChild(notification);
+
+```
 setTimeout(() => {
-notification.style.animation = ‘slideOut 0.3s ease-out’;
-setTimeout(() => { if (notification.parentNode) document.body.removeChild(notification); }, 300);
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+        if (notification.parentNode) document.body.removeChild(notification);
+    }, 300);
 }, 3000);
+```
+
 }
 
+// Notification animations
 const style = document.createElement(‘style’);
 style.textContent = `@keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } } @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(400px); opacity: 0; } }`;
 document.head.appendChild(style);
 
 // =============================================
-// PARALLAX
+// PARALLAX (from original — disabled in corporate)
 // =============================================
 
 window.addEventListener(‘scroll’, function() {
 if (document.documentElement.getAttribute(‘data-theme’) === ‘corporate’) return;
 const scrolled = window.pageYOffset;
 const hero = document.querySelector(’.hero-image’);
-if (hero) hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+if (hero) {
+hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+}
 });
 
 // =============================================
-// MOBILE MENU TOGGLE
+// MOBILE MENU TOGGLE (from original)
 // =============================================
 
 const logo = document.querySelector(’.logo’);
@@ -354,19 +409,21 @@ nav.style.display = nav.style.display === ‘flex’ ? ‘none’ : ‘flex’;
 }
 
 // =============================================
-// SMOOTH SCROLLING
+// SMOOTH SCROLLING (from original)
 // =============================================
 
 document.querySelectorAll(‘a[href^=”#”]’).forEach(anchor => {
 anchor.addEventListener(‘click’, function (e) {
 e.preventDefault();
 const target = document.querySelector(this.getAttribute(‘href’));
-if (target) target.scrollIntoView({ behavior: ‘smooth’, block: ‘start’ });
+if (target) {
+target.scrollIntoView({ behavior: ‘smooth’, block: ‘start’ });
+}
 });
 });
 
 // =============================================
-// LIGHTBOX
+// LIGHTBOX — ADDED
 // =============================================
 
 (function() {
@@ -403,7 +460,7 @@ function close() {
 
 function show() {
     img.src = photos[current];
-    counter.textContent = `${current + 1} / ${photos.length}`;
+    counter.textContent = (current + 1) + ' / ' + photos.length;
     prevBtn.style.visibility = photos.length > 1 ? 'visible' : 'hidden';
     nextBtn.style.visibility = photos.length > 1 ? 'visible' : 'hidden';
 }
@@ -411,7 +468,6 @@ function show() {
 function prev() { current = (current - 1 + photos.length) % photos.length; show(); }
 function next() { current = (current + 1) % photos.length; show(); }
 
-// Delegated click on photo grid — works for dynamically added photos
 const photoGrid = document.getElementById('photoGrid');
 if (photoGrid) {
     photoGrid.addEventListener('click', e => {
@@ -442,6 +498,7 @@ document.addEventListener('keydown', e => {
 // =============================================
 
 document.addEventListener(‘DOMContentLoaded’, function() {
+// Restore saved theme (without sound/flash)
 const saved = localStorage.getItem(‘rafstag-theme’);
 if (saved && saved !== ‘rock’) {
 document.documentElement.setAttribute(‘data-theme’, saved);
@@ -449,9 +506,11 @@ applyThemeText(corporateText);
 }
 
 ```
+// Theme toggle button
 const toggleBtn = document.getElementById('themeToggle');
 if (toggleBtn) toggleBtn.addEventListener('click', toggleTheme);
 
+// Start countdown
 updateCountdown();
 setInterval(updateCountdown, 1000);
 ```
