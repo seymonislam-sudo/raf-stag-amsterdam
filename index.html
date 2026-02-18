@@ -18,7 +18,6 @@
         background: #f4f6f9;
     }
 
-    /* Who are you? */
     .voter-identity {
         max-width: 500px;
         margin: 0 auto 50px;
@@ -45,9 +44,7 @@
         margin-bottom: 12px;
     }
 
-    [data-theme="corporate"] .voter-identity label {
-        color: #003087;
-    }
+    [data-theme="corporate"] .voter-identity label { color: #003087; }
 
     .voter-identity select {
         width: 100%;
@@ -77,11 +74,8 @@
         letter-spacing: 1px;
     }
 
-    [data-theme="corporate"] .identity-note {
-        color: #888;
-    }
+    [data-theme="corporate"] .identity-note { color: #888; }
 
-    /* Suggest form */
     .suggest-form {
         max-width: 600px;
         margin: 0 auto 50px;
@@ -106,15 +100,9 @@
         margin: 0 0 20px 0;
     }
 
-    [data-theme="corporate"] .suggest-form h3 {
-        color: #003087;
-    }
+    [data-theme="corporate"] .suggest-form h3 { color: #003087; }
 
-    .suggest-row {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
+    .suggest-row { display: flex; gap: 10px; margin-bottom: 10px; }
 
     .suggest-row input,
     .suggest-row select,
@@ -132,9 +120,7 @@
 
     .suggest-row input:focus,
     .suggest-row select:focus,
-    .suggest-form textarea:focus {
-        border-color: #ff0000;
-    }
+    .suggest-form textarea:focus { border-color: #ff0000; }
 
     [data-theme="corporate"] .suggest-row input,
     [data-theme="corporate"] .suggest-row select,
@@ -146,13 +132,9 @@
 
     [data-theme="corporate"] .suggest-row input:focus,
     [data-theme="corporate"] .suggest-row select:focus,
-    [data-theme="corporate"] .suggest-form textarea:focus {
-        border-color: #003087;
-    }
+    [data-theme="corporate"] .suggest-form textarea:focus { border-color: #003087; }
 
-    .suggest-row input.suggest-title {
-        flex: 1;
-    }
+    .suggest-row input.suggest-title { flex: 1; }
 
     .suggest-row select.suggest-cat {
         width: 160px;
@@ -183,24 +165,10 @@
         transition: background 0.2s, transform 0.1s;
     }
 
-    .suggest-btn:hover {
-        background: #cc0000;
-        transform: translateY(-1px);
-    }
-
-    .suggest-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    [data-theme="corporate"] .suggest-btn {
-        background: #003087;
-    }
-
-    [data-theme="corporate"] .suggest-btn:hover {
-        background: #002060;
-    }
+    .suggest-btn:hover { background: #cc0000; transform: translateY(-1px); }
+    .suggest-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    [data-theme="corporate"] .suggest-btn { background: #003087; }
+    [data-theme="corporate"] .suggest-btn:hover { background: #002060; }
 
     .locked-notice {
         display: none;
@@ -222,18 +190,9 @@
         color: #003087;
     }
 
-    /* Filter buttons */
-    .suggestions-container {
-        max-width: 700px;
-        margin: 0 auto;
-    }
+    .suggestions-container { max-width: 700px; margin: 0 auto; }
 
-    .suggestions-filter {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 28px;
-        flex-wrap: wrap;
-    }
+    .suggestions-filter { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
 
     .filter-btn {
         padding: 7px 16px;
@@ -250,23 +209,13 @@
     }
 
     .filter-btn.active,
-    .filter-btn:hover {
-        border-color: #ff0000;
-        color: #ff0000;
-    }
+    .filter-btn:hover { border-color: #ff0000; color: #ff0000; }
 
-    [data-theme="corporate"] .filter-btn {
-        border-color: #ddd;
-        color: #888;
-    }
+    [data-theme="corporate"] .filter-btn { border-color: #ddd; color: #888; }
 
     [data-theme="corporate"] .filter-btn.active,
-    [data-theme="corporate"] .filter-btn:hover {
-        border-color: #003087;
-        color: #003087;
-    }
+    [data-theme="corporate"] .filter-btn:hover { border-color: #003087; color: #003087; }
 
-    /* Suggestion cards */
     .suggestion-card {
         background: #111;
         border: 1px solid #1e1e1e;
@@ -279,9 +228,7 @@
         transition: border-color 0.2s;
     }
 
-    .suggestion-card:hover {
-        border-color: #333;
-    }
+    .suggestion-card:hover { border-color: #333; }
 
     [data-theme="corporate"] .suggestion-card {
         background: #fff;
@@ -289,15 +236,9 @@
         box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
 
-    .suggestion-card.voted-by-me {
-        border-color: #ff000055;
-    }
+    .suggestion-card.voted-by-me { border-color: #ff000055; }
+    [data-theme="corporate"] .suggestion-card.voted-by-me { border-color: #00308755; }
 
-    [data-theme="corporate"] .suggestion-card.voted-by-me {
-        border-color: #00308755;
-    }
-
-    /* Vote button */
     .vote-btn {
         display: flex;
         flex-direction: column;
@@ -316,37 +257,15 @@
         transition: all 0.15s;
     }
 
-    .vote-btn:hover {
-        border-color: #ff0000;
-        color: #ff0000;
-    }
-
-    .vote-btn.voted {
-        background: #ff0000;
-        border-color: #ff0000;
-        color: #fff;
-    }
-
-    [data-theme="corporate"] .vote-btn {
-        border-color: #ddd;
-        color: #aaa;
-    }
-
-    [data-theme="corporate"] .vote-btn:hover {
-        border-color: #003087;
-        color: #003087;
-    }
-
-    [data-theme="corporate"] .vote-btn.voted {
-        background: #003087;
-        border-color: #003087;
-        color: #fff;
-    }
+    .vote-btn:hover { border-color: #ff0000; color: #ff0000; }
+    .vote-btn.voted { background: #ff0000; border-color: #ff0000; color: #fff; }
+    [data-theme="corporate"] .vote-btn { border-color: #ddd; color: #aaa; }
+    [data-theme="corporate"] .vote-btn:hover { border-color: #003087; color: #003087; }
+    [data-theme="corporate"] .vote-btn.voted { background: #003087; border-color: #003087; color: #fff; }
 
     .vote-arrow { font-size: 1rem; line-height: 1; }
     .vote-count { font-size: 1rem; font-weight: bold; }
 
-    /* Card content */
     .suggestion-content { flex: 1; min-width: 0; }
 
     .suggestion-header {
@@ -365,9 +284,7 @@
         letter-spacing: 1px;
     }
 
-    [data-theme="corporate"] .suggestion-title {
-        color: #1a1a2e;
-    }
+    [data-theme="corporate"] .suggestion-title { color: #1a1a2e; }
 
     .suggestion-category {
         font-family: 'Courier New', monospace;
@@ -378,35 +295,11 @@
         border-radius: 2px;
     }
 
-    .cat-activity .suggestion-category {
-        background: #ff000022;
-        color: #ff0000;
-        border: 1px solid #ff000044;
-    }
-
-    .cat-place .suggestion-category {
-        background: #00aaff22;
-        color: #00aaff;
-        border: 1px solid #00aaff44;
-    }
-
-    .cat-food .suggestion-category {
-        background: #ffaa0022;
-        color: #ffaa00;
-        border: 1px solid #ffaa0044;
-    }
-
-    .cat-other .suggestion-category {
-        background: #aa00ff22;
-        color: #aa00ff;
-        border: 1px solid #aa00ff44;
-    }
-
-    [data-theme="corporate"] .suggestion-category {
-        background: #003087;
-        color: #fff;
-        border: 1px solid #003087;
-    }
+    .cat-activity .suggestion-category { background: #ff000022; color: #ff0000; border: 1px solid #ff000044; }
+    .cat-place .suggestion-category { background: #00aaff22; color: #00aaff; border: 1px solid #00aaff44; }
+    .cat-food .suggestion-category { background: #ffaa0022; color: #ffaa00; border: 1px solid #ffaa0044; }
+    .cat-other .suggestion-category { background: #aa00ff22; color: #aa00ff; border: 1px solid #aa00ff44; }
+    [data-theme="corporate"] .suggestion-category { background: #003087; color: #fff; border: 1px solid #003087; }
 
     .suggestion-desc {
         font-family: 'Courier New', monospace;
@@ -460,7 +353,7 @@
     </div>
 
 ```
-<!-- Corporate Banner (hidden by default) -->
+<!-- Corporate Banner -->
 <div class="corporate-banner" id="corporateBanner">
     <div class="corporate-banner-text">J.P. MORGAN &mdash; CONFIDENTIAL &mdash; FOR INTERNAL USE ONLY</div>
 </div>
@@ -589,6 +482,7 @@
     <h2 class="section-title">TOUR DATES</h2>
     <div class="section-subtitle">3 NIGHTS OF CHAOS</div>
     <div class="tour-schedule">
+        <!-- Day 1 -->
         <div class="tour-day">
             <div class="day-header">
                 <div class="day-number">DAY 1</div>
@@ -639,6 +533,7 @@
                 </div>
             </div>
         </div>
+        <!-- Day 2 -->
         <div class="tour-day">
             <div class="day-header">
                 <div class="day-number">DAY 2</div>
@@ -675,6 +570,7 @@
                 </div>
             </div>
         </div>
+        <!-- Day 3 -->
         <div class="tour-day">
             <div class="day-header">
                 <div class="day-number">DAY 3</div>
@@ -769,12 +665,11 @@
     </div>
 </section>
 
-<!-- ===== VOTE SECTION ===== -->
+<!-- VOTE SECTION -->
 <section id="vote" class="voting-section">
     <h2 class="section-title">THE VOTE</h2>
     <div class="section-subtitle" id="voteSubtitle">SUGGEST & VOTE ON ACTIVITIES / PLACES</div>
 
-    <!-- Who are you? -->
     <div class="voter-identity">
         <label>WHO ARE YOU?</label>
         <select id="voterSelect">
@@ -793,7 +688,6 @@
         <div class="identity-note" id="identityNote">Select your name to suggest & vote</div>
     </div>
 
-    <!-- Suggest form -->
     <div class="suggest-form">
         <h3 id="suggestFormTitle">🎸 PITCH YOUR IDEA</h3>
         <div class="suggest-row">
@@ -810,7 +704,6 @@
         <button class="suggest-btn" id="submitSuggestion">+ SUBMIT SUGGESTION</button>
     </div>
 
-    <!-- Suggestions list -->
     <div class="suggestions-container">
         <div class="suggestions-filter">
             <button class="filter-btn active" data-filter="all">ALL</button>
@@ -893,6 +786,17 @@
     </div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+    <div class="lightbox-inner" id="lightboxInner">
+        <button class="lightbox-close" id="lightboxClose">✕ CLOSE</button>
+        <img src="" alt="Photo" id="lightboxImg">
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#8249;</button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">&#8250;</button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+</div>
+
 <!-- Core site functionality -->
 <script src="script.js"></script>
 
@@ -916,8 +820,8 @@
     const db = getFirestore(app);
 
     // ===== PHOTO UPLOAD =====
-    const photosRef   = collection(db, 'photos');
-    const CLOUD_NAME  = 'dqugijser';
+    const photosRef     = collection(db, 'photos');
+    const CLOUD_NAME    = 'dqugijser';
     const UPLOAD_PRESET = 'rafstag_photos';
 
     const uploadZone = document.getElementById('uploadZone');
@@ -972,7 +876,7 @@
         if (snap.empty && rendered.size === 0) {
             const p = document.createElement('p');
             p.className = 'gallery-msg';
-            p.style.cssText = 'color:#888;text-align:center;width:100%;padding:40px 20px;';
+            p.style.cssText = 'color:#888;text-align:center;width:100%;padding:40px 20px;font-family:Arial,sans-serif;';
             p.textContent = 'No photos yet. Be the first to upload!';
             photoGrid.appendChild(p);
         }
@@ -991,26 +895,24 @@
     // ===== VOTING =====
     const suggestionsRef = collection(db, 'suggestions');
 
-    let currentUser  = null;
+    let currentUser   = null;
     let currentFilter = 'all';
-    let allDocs = {}; // id -> data
+    let allDocs = {};
 
-    const voterSelect     = document.getElementById('voterSelect');
-    const submitBtn       = document.getElementById('submitSuggestion');
-    const titleInput      = document.getElementById('suggestionTitle');
-    const catSelect       = document.getElementById('suggestionCat');
-    const descInput       = document.getElementById('suggestionDesc');
-    const suggestionsList = document.getElementById('suggestionsList');
-    const lockedNotice    = document.getElementById('lockedNotice');
-    const identityNote    = document.getElementById('identityNote');
+    const voterSelect      = document.getElementById('voterSelect');
+    const submitBtn        = document.getElementById('submitSuggestion');
+    const titleInput       = document.getElementById('suggestionTitle');
+    const catSelect        = document.getElementById('suggestionCat');
+    const descInput        = document.getElementById('suggestionDesc');
+    const suggestionsList  = document.getElementById('suggestionsList');
+    const lockedNotice     = document.getElementById('lockedNotice');
+    const identityNote     = document.getElementById('identityNote');
     const suggestFormTitle = document.getElementById('suggestFormTitle');
-    const voteSubtitle    = document.getElementById('voteSubtitle');
+    const voteSubtitle     = document.getElementById('voteSubtitle');
 
-    // Initial locked state
     lockedNotice.style.display = 'block';
     submitBtn.style.display = 'none';
 
-    // Theme-aware copy
     function updateVoteCopy() {
         const corp = document.documentElement.getAttribute('data-theme') === 'corporate';
         suggestFormTitle.textContent = corp ? '📋 SUBMIT A PROPOSAL' : '🎸 PITCH YOUR IDEA';
@@ -1021,7 +923,6 @@
     new MutationObserver(updateVoteCopy).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     updateVoteCopy();
 
-    // Name selection
     voterSelect.addEventListener('change', () => {
         currentUser = voterSelect.value || null;
         if (currentUser) {
@@ -1036,7 +937,6 @@
         render();
     });
 
-    // Filter buttons
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1046,22 +946,19 @@
         });
     });
 
-    // Submit
     submitBtn.addEventListener('click', async () => {
         if (!currentUser) return;
         const title = titleInput.value.trim();
         if (!title) { titleInput.focus(); return; }
-
         submitBtn.textContent = 'SUBMITTING…';
         submitBtn.disabled = true;
-
         try {
             await addDoc(suggestionsRef, {
                 title,
                 category: catSelect.value,
                 description: descInput.value.trim(),
                 suggestedBy: currentUser,
-                voters: [currentUser], // auto-upvote own idea
+                voters: [currentUser],
                 createdAt: serverTimestamp()
             });
             titleInput.value = '';
@@ -1071,12 +968,10 @@
             console.error(e);
             alert('Failed to submit. Try again.');
         }
-
         submitBtn.textContent = '+ SUBMIT SUGGESTION';
         submitBtn.disabled = false;
     });
 
-    // Real-time sync
     onSnapshot(suggestionsRef, snap => {
         allDocs = {};
         snap.forEach(d => { allDocs[d.id] = { id: d.id, ...d.data() }; });
@@ -1088,7 +983,6 @@
         let items = Object.values(allDocs);
         if (currentFilter !== 'all') items = items.filter(s => s.category === currentFilter);
         items.sort((a, b) => (b.voters?.length || 0) - (a.voters?.length || 0));
-
         if (!items.length) {
             const el = document.createElement('div');
             el.className = 'no-suggestions';
@@ -1098,18 +992,16 @@
             suggestionsList.appendChild(el);
             return;
         }
-
         items.forEach(s => suggestionsList.appendChild(buildCard(s)));
     }
 
     const CAT_LABELS = { activity: '🎯 Activity', place: '🍺 Bar / Place', food: '🍔 Food', other: '⚡ Other' };
 
     function buildCard(s) {
-        const voters   = s.voters || [];
-        const iVoted   = currentUser && voters.includes(currentUser);
-        const card     = document.createElement('div');
+        const voters = s.voters || [];
+        const iVoted = currentUser && voters.includes(currentUser);
+        const card   = document.createElement('div');
         card.className = `suggestion-card cat-${s.category} ${iVoted ? 'voted-by-me' : ''}`;
-
         card.innerHTML = `
             <button class="vote-btn ${iVoted ? 'voted' : ''}">
                 <span class="vote-arrow">▲</span>
@@ -1124,7 +1016,6 @@
                 <div class="suggestion-meta">Suggested by ${s.suggestedBy || '?'}</div>
                 ${voters.length ? `<div class="voters-list">👍 ${voters.join(', ')}</div>` : ''}
             </div>`;
-
         card.querySelector('.vote-btn').addEventListener('click', () => toggleVote(s.id, iVoted));
         return card;
     }
