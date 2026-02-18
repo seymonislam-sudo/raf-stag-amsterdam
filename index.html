@@ -1077,7 +1077,7 @@
     });
 
     // Real-time sync
-    onSnapshot(query(suggestionsRef, orderBy('createdAt', 'desc')), snap => {
+    onSnapshot(suggestionsRef, snap => {
         allDocs = {};
         snap.forEach(d => { allDocs[d.id] = { id: d.id, ...d.data() }; });
         render();
