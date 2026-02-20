@@ -32,7 +32,9 @@ const corporateText = {
         'THE BOSS': 'EVENT COORDINATOR',
         'THE SHORT GUY': 'OPERATIONS ANALYST',
         'THE TECH GUY': 'TECHNOLOGY SME',
-        'THE CREW': 'TEAM MEMBER'
+        'THE DARK HORSE': 'TEAM MEMBER',
+        'THE CHAOS AGENT': 'TEAM MEMBER',
+        'LANKY': 'TEAM MEMBER'
     },
     // Bio
     bios: {
@@ -271,7 +273,7 @@ function toggleTheme() {
 let confettiFired = false;
 
 function updateCountdown() {
-    const tourDate = new Date('2026-03-06T14:00:00').getTime();
+    const tourDate = new Date('2026-03-06T15:30:00').getTime();
     const now = new Date().getTime();
     const distance = tourDate - now;
 
