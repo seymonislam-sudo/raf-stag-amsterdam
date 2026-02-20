@@ -1624,3 +1624,31 @@ section {
 .lightbox-prev { left: 10px; }
 .lightbox-next { right: 10px; }
 .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
+
+/* =============================================
+   STAM ARM TOGGLE
+   ============================================= */
+.stam-toggle {
+    display: block;
+    margin: 10px auto 0;
+    background: transparent;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.stam-toggle:hover {
+    background: #ff0000;
+    color: #fff;
+}
+
+[data-theme="corporate"] .stam-toggle {
+    display: none;
+}
