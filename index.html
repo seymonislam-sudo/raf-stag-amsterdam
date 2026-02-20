@@ -109,9 +109,10 @@
             <div class="lineup-role">BEST MAN • TALL FRENCH GUY</div>
         </div>
         <div class="lineup-card">
-            <img src="Stam.PNG" alt="Stam">
+            <img src="Stam.PNG" alt="Stam" id="stamImg">
             <div class="lineup-name">STAM</div>
-            <div class="lineup-role">THE DUTCH GUY • TALL</div>
+            <div class="lineup-role">THE DUTCH GUY &bull; TALL</div>
+            <button class="stam-toggle" id="stamToggle" onclick="toggleStam()">💪 TOGGLE ARMS</button>
         </div>
         <div class="lineup-card">
             <img src="Antoine.PNG" alt="Antoine">
@@ -816,5 +817,16 @@
     }
 </script>
 
+
+<script>
+    let stamSkinny = false;
+    function toggleStam() {
+        const img = document.getElementById("stamImg");
+        const btn = document.getElementById("stamToggle");
+        stamSkinny = !stamSkinny;
+        img.src = stamSkinny ? "Stam3.PNG" : "Stam.PNG";
+        btn.textContent = stamSkinny ? "💪 RESTORE GAINS" : "💪 TOGGLE ARMS";
+    }
+</script>
 </body>
 </html>
