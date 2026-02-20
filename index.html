@@ -5,507 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAF - THE FINAL SEND-OFF TOUR | Amsterdam 2026</title>
+    <meta name="description" content="Raf's Final Send-Off Tour — Amsterdam, March 6-8, 2026. The crew. The chaos. The memories.">
+    <meta property="og:title" content="RAF — THE FINAL SEND-OFF TOUR">
+    <meta property="og:description" content="Amsterdam • March 6-8, 2026 • The stag do of the decade.">
+    <meta property="og:image" content="https://rafstag.com/raf_viking.png">
+    <meta property="og:url" content="https://rafstag.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* ===== VOTING SECTION ===== */
-        .voting-section {
-            padding: 80px 20px;
-            background: #0a0a0a;
-        }
-
-```
-[data-theme="corporate"] .voting-section {
-    background: #f4f6f9;
-}
-
-/* Who are you? */
-.voter-identity {
-    max-width: 500px;
-    margin: 0 auto 50px;
-    background: #111;
-    border: 1px solid #2a2a2a;
-    border-radius: 4px;
-    padding: 28px;
-    text-align: center;
-}
-
-[data-theme="corporate"] .voter-identity {
-    background: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.voter-identity label {
-    display: block;
-    font-family: 'Courier New', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    color: #ff0000;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-}
-
-[data-theme="corporate"] .voter-identity label {
-    color: #003087;
-}
-
-.voter-identity select {
-    width: 100%;
-    padding: 12px 16px;
-    background: #000;
-    border: 1px solid #333;
-    color: #fff;
-    font-family: 'Courier New', monospace;
-    font-size: 1rem;
-    border-radius: 2px;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-[data-theme="corporate"] .voter-identity select {
-    background: #f8f9fa;
-    border: 1px solid #ccc;
-    color: #1a1a2e;
-}
-
-.identity-note {
-    margin-top: 10px;
-    font-size: 0.72rem;
-    color: #555;
-    font-family: 'Courier New', monospace;
-    letter-spacing: 1px;
-}
-
-[data-theme="corporate"] .identity-note {
-    color: #888;
-}
-
-/* Suggest form */
-.suggest-form {
-    max-width: 600px;
-    margin: 0 auto 50px;
-    background: #111;
-    border: 1px solid #2a2a2a;
-    border-radius: 4px;
-    padding: 28px;
-}
-
-[data-theme="corporate"] .suggest-form {
-    background: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.suggest-form h3 {
-    font-family: 'Courier New', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    color: #ff0000;
-    text-transform: uppercase;
-    margin: 0 0 20px 0;
-}
-
-[data-theme="corporate"] .suggest-form h3 {
-    color: #003087;
-}
-
-.suggest-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.suggest-row input,
-.suggest-row select,
-.suggest-form textarea {
-    padding: 12px 14px;
-    background: #000;
-    border: 1px solid #333;
-    color: #fff;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.suggest-row input:focus,
-.suggest-row select:focus,
-.suggest-form textarea:focus {
-    border-color: #ff0000;
-}
-
-[data-theme="corporate"] .suggest-row input,
-[data-theme="corporate"] .suggest-row select,
-[data-theme="corporate"] .suggest-form textarea {
-    background: #f8f9fa;
-    border: 1px solid #ccc;
-    color: #1a1a2e;
-}
-
-[data-theme="corporate"] .suggest-row input:focus,
-[data-theme="corporate"] .suggest-row select:focus,
-[data-theme="corporate"] .suggest-form textarea:focus {
-    border-color: #003087;
-}
-
-.suggest-row input.suggest-title {
-    flex: 1;
-}
-
-.suggest-row select.suggest-cat {
-    width: 160px;
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-.suggest-form textarea {
-    width: 100%;
-    box-sizing: border-box;
-    resize: vertical;
-    min-height: 70px;
-    display: block;
-    margin-bottom: 12px;
-}
-
-.suggest-btn {
-    background: #ff0000;
-    color: #fff;
-    border: none;
-    padding: 12px 28px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: background 0.2s, transform 0.1s;
-}
-
-.suggest-btn:hover {
-    background: #cc0000;
-    transform: translateY(-1px);
-}
-
-.suggest-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-[data-theme="corporate"] .suggest-btn {
-    background: #003087;
-}
-
-[data-theme="corporate"] .suggest-btn:hover {
-    background: #002060;
-}
-
-.locked-notice {
-    display: none;
-    text-align: center;
-    padding: 12px;
-    background: #ff000011;
-    border: 1px solid #ff000033;
-    border-radius: 4px;
-    color: #ff0000;
-    font-family: 'Courier New', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    margin-bottom: 14px;
-}
-
-[data-theme="corporate"] .locked-notice {
-    background: #00308711;
-    border-color: #00308733;
-    color: #003087;
-}
-
-/* Filter buttons */
-.suggestions-container {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.suggestions-filter {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    padding: 7px 16px;
-    background: transparent;
-    border: 1px solid #2a2a2a;
-    color: #555;
-    font-family: 'Courier New', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s;
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-    border-color: #ff0000;
-    color: #ff0000;
-}
-
-[data-theme="corporate"] .filter-btn {
-    border-color: #ddd;
-    color: #888;
-}
-
-[data-theme="corporate"] .filter-btn.active,
-[data-theme="corporate"] .filter-btn:hover {
-    border-color: #003087;
-    color: #003087;
-}
-
-/* Suggestion cards */
-.suggestion-card {
-    background: #111;
-    border: 1px solid #1e1e1e;
-    border-radius: 4px;
-    padding: 18px 20px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    transition: border-color 0.2s;
-}
-
-.suggestion-card:hover {
-    border-color: #333;
-}
-
-[data-theme="corporate"] .suggestion-card {
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-
-.suggestion-card.voted-by-me {
-    border-color: #ff000055;
-}
-
-[data-theme="corporate"] .suggestion-card.voted-by-me {
-    border-color: #00308755;
-}
-
-/* Vote button */
-.vote-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    background: transparent;
-    border: 1px solid #2a2a2a;
-    color: #555;
-    width: 50px;
-    min-width: 50px;
-    padding: 10px 0;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: 'Courier New', monospace;
-    font-size: 0.75rem;
-    transition: all 0.15s;
-}
-
-.vote-btn:hover {
-    border-color: #ff0000;
-    color: #ff0000;
-}
-
-.vote-btn.voted {
-    background: #ff0000;
-    border-color: #ff0000;
-    color: #fff;
-}
-
-[data-theme="corporate"] .vote-btn {
-    border-color: #ddd;
-    color: #aaa;
-}
-
-[data-theme="corporate"] .vote-btn:hover {
-    border-color: #003087;
-    color: #003087;
-}
-
-[data-theme="corporate"] .vote-btn.voted {
-    background: #003087;
-    border-color: #003087;
-    color: #fff;
-}
-
-.vote-arrow { font-size: 1rem; line-height: 1; }
-.vote-count { font-size: 1rem; font-weight: bold; }
-
-/* Card content */
-.suggestion-content { flex: 1; min-width: 0; }
-
-.suggestion-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
-    flex-wrap: wrap;
-}
-
-.suggestion-title {
-    font-family: 'Courier New', monospace;
-    font-size: 0.95rem;
-    color: #fff;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-[data-theme="corporate"] .suggestion-title {
-    color: #1a1a2e;
-}
-
-.suggestion-category {
-    font-family: 'Courier New', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 2px;
-}
-
-.cat-activity .suggestion-category {
-    background: #ff000022;
-    color: #ff0000;
-    border: 1px solid #ff000044;
-}
-
-.cat-place .suggestion-category {
-    background: #00aaff22;
-    color: #00aaff;
-    border: 1px solid #00aaff44;
-}
-
-.cat-food .suggestion-category {
-    background: #ffaa0022;
-    color: #ffaa00;
-    border: 1px solid #ffaa0044;
-}
-
-.cat-other .suggestion-category {
-    background: #aa00ff22;
-    color: #aa00ff;
-    border: 1px solid #aa00ff44;
-}
-
-[data-theme="corporate"] .suggestion-category {
-    background: #003087;
-    color: #fff;
-    border: 1px solid #003087;
-}
-
-.suggestion-desc {
-    font-family: 'Courier New', monospace;
-    font-size: 0.78rem;
-    color: #555;
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-
-[data-theme="corporate"] .suggestion-desc { color: #666; }
-
-.suggestion-meta {
-    font-family: 'Courier New', monospace;
-    font-size: 0.65rem;
-    color: #3a3a3a;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-}
-
-[data-theme="corporate"] .suggestion-meta { color: #aaa; }
-
-.voters-list {
-    font-family: 'Courier New', monospace;
-    font-size: 0.68rem;
-    color: #ff0000;
-    letter-spacing: 1px;
-}
-
-[data-theme="corporate"] .voters-list { color: #003087; }
-
-.no-suggestions {
-    text-align: center;
-    padding: 50px 20px;
-    color: #2a2a2a;
-    font-family: 'Courier New', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-[data-theme="corporate"] .no-suggestions { color: #bbb; }
-
-/* ===== LIGHTBOX ===== */
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95);
-    z-index: 99999;
-    align-items: center;
-    justify-content: center;
-}
-.lightbox.open { display: flex; }
-.lightbox-img-wrap {
-    max-width: 90vw;
-    max-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.lightbox-img-wrap img {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: 4px;
-}
-.lightbox-close {
-    position: absolute;
-    top: 20px; right: 24px;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 1;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
-.lightbox-close:hover { opacity: 1; }
-.lightbox-prev, .lightbox-next {
-    position: absolute;
-    top: 50%; transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 4rem;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-    padding: 0 20px;
-    line-height: 1;
-}
-.lightbox-prev { left: 10px; }
-.lightbox-next { right: 10px; }
-.lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
-</style>
-```
-
 </head>
 <body>
     <!-- Parental Advisory Banner (Rock theme) -->
@@ -629,17 +136,17 @@
         <div class="lineup-card">
             <img src="Evgeni.PNG" alt="Evgeni">
             <div class="lineup-name">EVGENI</div>
-            <div class="lineup-role">THE CREW</div>
+            <div class="lineup-role">THE DARK HORSE</div>
         </div>
         <div class="lineup-card">
             <img src="Daniel.PNG" alt="Daniel">
             <div class="lineup-name">DAN</div>
-            <div class="lineup-role">THE CREW</div>
+            <div class="lineup-role">THE CHAOS AGENT</div>
         </div>
         <div class="lineup-card">
             <img src="Dave.PNG" alt="Dave">
             <div class="lineup-name">DAVE</div>
-            <div class="lineup-role">THE CREW</div>
+            <div class="lineup-role">LANKY</div>
         </div>
     </div>
 </section>
@@ -837,7 +344,6 @@
     <h2 class="section-title">THE VOTE</h2>
     <div class="section-subtitle" id="voteSubtitle">SUGGEST & VOTE ON ACTIVITIES / PLACES</div>
 
-```
 <!-- Who are you? -->
 <div class="voter-identity">
     <label>WHO ARE YOU?</label>
@@ -887,8 +393,6 @@
         <div class="no-suggestions">NO SUGGESTIONS YET — BE THE FIRST TO PITCH AN IDEA</div>
     </div>
 </div>
-```
-
 </section>
 
 <!-- Photo Gallery -->
@@ -1042,6 +546,19 @@
             if (e.key === 'ArrowLeft') showPrev();
             if (e.key === 'ArrowRight') showNext();
         });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        lightbox.addEventListener('touchend', function(e) {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) showNext();
+                else showPrev();
+            }
+        }, { passive: true });
     })();
 </script>
 
